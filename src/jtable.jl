@@ -1,13 +1,12 @@
 module jtable
 
-import DataFrames, DataFramesMeta
+import DataFrames
 
-struct mutable Data_Table
-	df::DataFrames.AbstractDataFrame
-	a::Int
- 	b::Int
+include("rtf_table.jl")
+include("properties_matrix.jl")
+include("string_matrix.jl")
+include("border_properties.jl")
+include("write_table.jl")
+
+
 end
-
-greet() = print("Hello World!")
-
-end # module jtable

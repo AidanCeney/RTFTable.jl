@@ -33,14 +33,18 @@ function set_row_properties(property_matrix, prop,onoff,rows)
 	return set_properties(property_matrix, prop, onoff, rows, 1:length(property_matrix[1]))
 end
 
+function set_all_properties(property_matrix,prop,onoff)
+	return set_properties(property_matrix, prop, onoff, 1:length(property_matrix), 1:length(property_matrix[1]))
+end
 
 
 
-function make_values_matrix(mlen,mht)
+
+function make_value_matrix(mlen,mht)
 	
 	values_matrix = Vector{Any}(undef, mlen)
 	for i = 1:mlen
-		values_matrix[i] = Array{Dict{String,Bool}}(undef,mht)
+		values_matrix[i] = Array{Dict{String,String}}(undef,mht)
 	end
 
 	for i = 1:mlen
@@ -66,7 +70,10 @@ function set_col_values(value_matrix,prop,value,cols)
 	return set_properties(value_matrix, prop, value, 1:length(value_matrix), cols)
 end
 
-function set_row_value(value_matrix, prop,value,rows)
+function set_row_values(value_matrix, prop,value,rows)
 	return set_properties(value_matrix, prop, value, rows, 1:length(value_matrix[1]))
 end
 
+function set_all_values(property_matrix,prop,value)
+	return set_properties(property_matrix, prop, value, 1:length(property_matrix), 1:length(property_matrix[1]))
+end

@@ -1,0 +1,9 @@
+name = "jtable"
+uuid = "1667cc47-68f3-4867-92cf-6a18fe89e349"
+authors = ["aidanc "]
+version = "0.1.0"
+
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DataFramesMeta = "1313f7d8-7da2-5740-9ea0-a2ca25f37964"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
