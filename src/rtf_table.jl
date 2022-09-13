@@ -26,33 +26,39 @@ function init_property_matrix!(property_matrix,nrow,ncol)
 			 "top_border"   ,  "top_border_width",
 			 "right_border" ,  "right_border_width",
 			 "bottom_border",  "bottom_border_width",
-			 "value"]
+			 "value",          "cellx"]
 	for i = 1:nrow
 		for j = 1:ncol
 			for prop = ls_properties
-				set_all_properties(property_matrix,prop,prop == "value")
+				set_properties(property_matrix,prop,prop in ["value" "cellx"],i,j)
 			end
 		end
 	end
 	return
 end
 
-function init_value_matrix!(property_matrix,df,nrow,ncol)
+function init_value_matrix!(property_matrix,df,nrow,ncol;leng_inch = 8.5)
 	ls_properties = ["left_border"   => "",  "left_border_width"   => "10",
 			 "top_border"    => "",  "top_border_width"    => "10",
 			 "right_border"  => "",  "right_border_width"  => "10",
 			 "bottom_border" => "",  "bottom_border_width" => "10",
-			 "value" => ""]
+			 "value" => "",          "cellx"               => "" ]
 	for i = 1:nrow
 		for j = 1:ncol
 			for (prop, val) in ls_properties
 				if prop == "value"
-					set_all_values(property_matrix,prop,string(df[i,j]))
+					set_values(property_matrix,prop,string(df[i,j]),i,j)
+				elseif prop == "cellx"
+					set_values(property_matrix,prop,string(init_cellx(j,ncol,leng_inch)),i,j)
 				else
-					set_all_values(property_matrix,prop,string(val))
+					set_values(property_matrix,prop,string(val),i,j)
 				end
 			end
 		end
 	end
 	return
+end
+
+function init_cellx(j,ncol,leng_inch)
+	return j * (leng_inch * 1440 / ncol)
 end

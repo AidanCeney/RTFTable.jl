@@ -1,5 +1,6 @@
 
-function write_table(rtf_path,string_matrix)
+function write_table(dt,rtf_path)
+	string_matrix = dt.string_matrix
 	touch(rtf_path)
 	rtf_file = open(rtf_path,"w")
 	for i = 1:size(string_matrix,1) 

@@ -3,12 +3,12 @@ function make_property_matrix(mlen,mht)
 	
 	property_matrix = Vector{Any}(undef, mlen)
 	for i = 1:mlen
-		property_matrix[i] = Array{Dict{String,Bool}}(undef,mht)
+		property_matrix[i] = Array{OrderedDict{String,Bool}}(undef,mht)
 	end
 
 	for i = 1:mlen
 		for j = 1:mht
-			property_matrix[i][j] = Dict{String, Bool}()
+			property_matrix[i][j] = OrderedDict{String, Bool}()
 		end
 	end
 
@@ -16,7 +16,15 @@ function make_property_matrix(mlen,mht)
 end
 
 function set_properties(property_matrix,prop,onoff,rows,cols)
-	
+
+	if isnothing(rows)
+		rows = 1:length(property_matrix)
+	end
+
+	if isnothing(cols)
+		cols = 1:length(property_matrix[1])
+	end
+
 	for i = 1:length(rows)
 		for j = 1:length(cols)
 			property_matrix[rows[i]][cols[j]][prop] = onoff
@@ -44,12 +52,12 @@ function make_value_matrix(mlen,mht)
 	
 	values_matrix = Vector{Any}(undef, mlen)
 	for i = 1:mlen
-		values_matrix[i] = Array{Dict{String,String}}(undef,mht)
+		values_matrix[i] = Array{OrderedDict{String,String}}(undef,mht)
 	end
 
 	for i = 1:mlen
 		for j = 1:mht
-			values_matrix[i][j] = Dict{String, String}()
+			values_matrix[i][j] = OrderedDict{String, String}()
 		end
 	end
 
@@ -58,6 +66,14 @@ end
 
 function set_values(value_matrix,prop,value,rows,cols)
 	
+	if isnothing(rows)
+		rows = 1:length(value_matrix)
+	end
+
+	if isnothing(cols)
+		cols = 1:length(value_matrix[1])
+	end
+
 	for i = 1:length(rows)
 		for j = 1:length(cols)
 			value_matrix[rows[i]][cols[j]][prop] = value

@@ -46,3 +46,7 @@ end
 function value(str_matrix,value,i,j)
 	str_matrix[i][j][2] = str_matrix[i][j][2] * value
 end
+
+function cellx(str_matrix,value,i,j)
+	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\cellx" *  value
+end
