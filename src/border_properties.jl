@@ -44,9 +44,10 @@ function left_border_width(str_matrix,value,i,j)
 end
 
 function value(str_matrix,value,i,j)
-	str_matrix[i][j][2] = str_matrix[i][j][2] * value
+	str_matrix[i][j][2] = str_matrix[i][j][2] * "{" * value * "}"
 end
 
 function cellx(str_matrix,value,i,j)
-	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\cellx" *  value
+	str_matrix[i][j][1] = str_matrix[i][j][1] * "\\cellx" *  value
+	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\cell" 
 end

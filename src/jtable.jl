@@ -9,5 +9,5 @@ include("string_matrix.jl")
 include("border_properties.jl")
 include("write_table.jl")
 include("set_border.jl")
-
+include("text_properties.jl")
 end

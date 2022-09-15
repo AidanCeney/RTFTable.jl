@@ -26,11 +26,12 @@ function init_property_matrix!(property_matrix,nrow,ncol)
 			 "top_border"   ,  "top_border_width",
 			 "right_border" ,  "right_border_width",
 			 "bottom_border",  "bottom_border_width",
+			 "fs",
 			 "value",          "cellx"]
 	for i = 1:nrow
 		for j = 1:ncol
 			for prop = ls_properties
-				set_properties(property_matrix,prop,prop in ["value" "cellx"],i,j)
+				set_properties(property_matrix,prop,prop in ["value" "cellx" "fs"],i,j)
 			end
 		end
 	end
@@ -42,6 +43,7 @@ function init_value_matrix!(property_matrix,df,nrow,ncol;leng_inch = 8.5)
 			 "top_border"    => "",  "top_border_width"    => "10",
 			 "right_border"  => "",  "right_border_width"  => "10",
 			 "bottom_border" => "",  "bottom_border_width" => "10",
+			 "fs"            => 20,
 			 "value" => "",          "cellx"               => "" ]
 	for i = 1:nrow
 		for j = 1:ncol
@@ -60,5 +62,5 @@ function init_value_matrix!(property_matrix,df,nrow,ncol;leng_inch = 8.5)
 end
 
 function init_cellx(j,ncol,leng_inch)
-	return j * (leng_inch * 1440 / ncol)
+	return Int(round(j * (leng_inch * 1440 / ncol)))
 end
