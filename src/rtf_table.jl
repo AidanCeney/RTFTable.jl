@@ -22,7 +22,8 @@ end
 
 
 function init_property_matrix!(property_matrix,nrow,ncol)
-	ls_properties = ["left_border"  ,  "left_border_width",
+	ls_properties = ["clmgf",           "clmrg",
+			 "left_border"  ,  "left_border_width",
 			 "top_border"   ,  "top_border_width",
 			 "right_border" ,  "right_border_width",
 			 "bottom_border",  "bottom_border_width",
@@ -39,7 +40,8 @@ function init_property_matrix!(property_matrix,nrow,ncol)
 end
 
 function init_value_matrix!(property_matrix,df,nrow,ncol;leng_inch = 8.5)
-	ls_properties = ["left_border"   => "",  "left_border_width"   => "10",
+	ls_properties = ["clmgf"          => "",  "clmrg"                => "",
+			 "left_border"   => "",  "left_border_width"   => "10",
 			 "top_border"    => "",  "top_border_width"    => "10",
 			 "right_border"  => "",  "right_border_width"  => "10",
 			 "bottom_border" => "",  "bottom_border_width" => "10",

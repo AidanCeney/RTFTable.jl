@@ -14,7 +14,7 @@ function update_string_matrix!(dt)
 		end
 	end
 	dt.string_matrix = string_matrix
-	return string_matrix
+	return 
 end
 
 function make_string_matrix(nrow_string_matrix,ncol_string_matrix)
@@ -36,7 +36,6 @@ end
 function write_properties(string_matrix,properties_cell,values_cell,i,j)
 	for (property_func, property_used) in properties_cell
 		    if property_used
-			    print(property_func)
 			    getfield(jtable, Symbol(property_func))(string_matrix,values_cell[property_func],i,j)
 		    end
 	end
