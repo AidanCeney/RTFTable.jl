@@ -1,7 +1,9 @@
 module jtable
 
 import DataFrames
+import YAML
 using  DataStructures
+
 
 include("rtf_table.jl")
 include("properties_matrix.jl")

@@ -1,0 +1,51 @@
+clmgf:
+  onoff: false
+  value:  
+clmrg:
+  onoff: false
+  value:
+left_border:
+  onoff: false
+  value:
+left_border_width:
+  onoff: false
+  value: 10
+top_border:
+  onoff: false
+  value:
+top_border_width:
+  onoff: false
+  value: 10
+right_border:
+  onoff: false
+  value:
+right_border_width:
+  onoff: false
+  value: 10
+bottom_border:
+  onoff: false
+  value:
+bottom_border_width:
+  onoff: false
+  value: 10
+left_align:
+  onoff: true
+  value: 
+center_align:
+  onoff: false
+  value: 
+right_align:
+  onoff: false
+  value: 
+justify_align:
+  onoff: false
+  value: 
+fs:
+  onoff: true
+  value: 20
+value:
+  onoff: true
+  value: 
+cellx:
+  onoff: true
+  value:
