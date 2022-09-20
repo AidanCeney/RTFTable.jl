@@ -1,51 +1,84 @@
 clmgf:
   onoff: false
-  value:  
+  value: 
+  close: false 
 clmrg:
   onoff: false
   value:
+  close: false
 left_border:
   onoff: false
   value:
+  close: false
 left_border_width:
   onoff: false
   value: 10
+  close: false
 top_border:
   onoff: false
   value:
+  close: false
 top_border_width:
   onoff: false
   value: 10
+  close: false
 right_border:
   onoff: false
   value:
+  close: false
 right_border_width:
   onoff: false
   value: 10
+  close: false
 bottom_border:
   onoff: false
   value:
+  close: false
 bottom_border_width:
   onoff: false
   value: 10
+  close: false
 left_align:
   onoff: true
   value: 
+  close: false
 center_align:
   onoff: false
   value: 
+  close: false
 right_align:
   onoff: false
   value: 
+  close: false
 justify_align:
   onoff: false
   value: 
+  close: false
+bold:
+  onoff: false
+  value: 
+  close: true
+italic:
+  onoff: false
+  value: 
+  close: true
 fs:
   onoff: true
   value: 20
+  close: false
 value:
   onoff: true
   value: 
+  close: false
+cbold:
+  onoff: false
+  value: 
+  close: true
+citalic:
+  onoff: false
+  value: 
+  close: true
 cellx:
   onoff: true
   value:
+  close: false
