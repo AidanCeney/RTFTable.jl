@@ -35,7 +35,7 @@ function init_property_matrix!(property_matrix,nrow,ncol)
 	return
 end
 
-function init_value_matrix!(property_matrix,df,nrow,ncol;leng_inch = 8.5)
+function init_value_matrix!(property_matrix,df,nrow,ncol;leng_inch = 6.5)
 
 	config_properties = YAML.load_file(project_path("config/init_properties.yaml"),dicttype=OrderedDict)
 	

@@ -41,7 +41,7 @@ function bold(str_matrix,value,i,j)
 	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\b"
 end
 
-function cbold(str_matrix,value,i,j)
+function close_bold(str_matrix,value,i,j)
 	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\b"
 end
 
@@ -50,7 +50,7 @@ function set_bold(dt;onoff = true,rows = Nothing(),cols = Nothing())
 	property_matrix = dt.property_matrix
 	value_matrix    = dt.value_matrix
 	set_properties(property_matrix,"bold",onoff,rows,cols)
-	set_properties(property_matrix,"cbold",onoff,rows,cols)
+	set_properties(property_matrix,"close_bold",onoff,rows,cols)
 	return
 end
 
@@ -58,7 +58,7 @@ function italic(str_matrix,value,i,j)
 	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\i"
 end
 
-function citalic(str_matrix,value,i,j)
+function close_italic(str_matrix,value,i,j)
 	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\i"
 end
 
@@ -67,7 +67,7 @@ function set_italic(dt;onoff = true,rows = Nothing(),cols = Nothing())
 	property_matrix = dt.property_matrix
 	value_matrix    = dt.value_matrix
 	set_properties(property_matrix,"italic",onoff,rows,cols)
-	set_properties(property_matrix,"citalic",onoff,rows,cols)
+	set_properties(property_matrix,"close_italic",onoff,rows,cols)
 	return
 end
 

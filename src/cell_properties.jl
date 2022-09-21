@@ -18,3 +18,21 @@ end
 function clmrg(str_matrix,value,i,j)
 	str_matrix[i][j][1] = str_matrix[i][j][1] * "\\clmrg"
 end
+
+function set_cell_width(dt,col_width;rows = Nothing(),cols = Nothing())
+	
+	if isnothing(cols)
+		cols = 1:length(dt.property_matrix[1])
+	end
+
+
+	if(length(col_width) != length(cols))
+		col_width = repeat([col_width],length(cols))
+	end
+	
+	width_val = 0
+	for i = 1:length(cols)
+		width_val += col_width[i]
+		set_values(dt.value_matrix,"cellx",string(width_val),rows,cols[i])
+	end
+end
