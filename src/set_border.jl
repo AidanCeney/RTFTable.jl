@@ -14,3 +14,15 @@ function set_borders!(dt;rows = Nothing(),cols = Nothing(),which_border = ["b" "
 	end
 	return
 end
+
+
+function write_border(str_matrix,i,j,border_id)
+	str_matrix[i][j][1] = str_matrix[i][j][1] * "\\clbrdr" * border_id * "\\brdrs"
+	return
+end
+
+function write_border_width(str_matrix,value,i,j)
+	str_matrix[i][j][1] = str_matrix[i][j][1] * "\\brdrw" * value
+	return
+end
+

@@ -10,13 +10,8 @@ function merge_cols(dt,rows,cols)
 	return
 end
 
-
-function clmgf(str_matrix,value,i,j)
-	str_matrix[i][j][1] = str_matrix[i][j][1] * "\\clmgf"
-end
-
-function clmrg(str_matrix,value,i,j)
-	str_matrix[i][j][1] = str_matrix[i][j][1] * "\\clmrg"
+function init_cellx(j,ncol,leng_inch)
+	return Int(round(j * (leng_inch * 1440 / ncol)))
 end
 
 function set_cell_width(dt,col_width;rows = Nothing(),cols = Nothing())
@@ -35,4 +30,5 @@ function set_cell_width(dt,col_width;rows = Nothing(),cols = Nothing())
 		width_val += col_width[i]
 		set_values(dt.value_matrix,"cellx",string(width_val),rows,cols[i])
 	end
+	return
 end

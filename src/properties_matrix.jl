@@ -1,95 +1,52 @@
 
-function make_property_matrix(mlen,mht)
+function make_dict_matrix(mlen,mht,type)
 	
 	property_matrix = Vector{Any}(undef, mlen)
 	for i = 1:mlen
-		property_matrix[i] = Array{OrderedDict{String,Bool}}(undef,mht)
+		property_matrix[i] = Array{OrderedDict{String,type}}(undef,mht)
 	end
 
 	for i = 1:mlen
 		for j = 1:mht
-			property_matrix[i][j] = OrderedDict{String, Bool}()
+			property_matrix[i][j] = OrderedDict{String, type}()
 		end
 	end
 
 	return property_matrix
+end
+
+function set_dict_matrix(dict_matrix,prop,set,rows,cols)
+	
+	if isnothing(rows)
+		rows = 1:length(dict_matrix)
+	end
+
+	if isnothing(cols)
+		cols = 1:length(dict_matrix[1])
+	end
+
+	for i = 1:length(rows)
+		for j = 1:length(cols)
+			dict_matrix[rows[i]][cols[j]][prop] = set
+		end
+	end
+	return dict_matrix
+end
+
+function make_property_matrix(mlen,mht)
+	return make_dict_matrix(mlen,mht,Bool)
 end
 
 function set_properties(property_matrix,prop,onoff,rows,cols)
-
-	if isnothing(rows)
-		rows = 1:length(property_matrix)
-	end
-
-	if isnothing(cols)
-		cols = 1:length(property_matrix[1])
-	end
-
-	for i = 1:length(rows)
-		for j = 1:length(cols)
-			property_matrix[rows[i]][cols[j]][prop] = onoff
-		end
-	end
-	return property_matrix
+	return set_dict_matrix(property_matrix,prop,onoff,rows,cols)
 end
-
-function set_col_properties(property_matrix,prop,onoff,cols)
-	return set_properties(property_matrix, prop, onoff, 1:length(property_matrix), cols)
-end
-
-function set_row_properties(property_matrix, prop,onoff,rows)
-	return set_properties(property_matrix, prop, onoff, rows, 1:length(property_matrix[1]))
-end
-
-function set_all_properties(property_matrix,prop,onoff)
-	return set_properties(property_matrix, prop, onoff, 1:length(property_matrix), 1:length(property_matrix[1]))
-end
-
-
 
 
 function make_value_matrix(mlen,mht)
-	
-	values_matrix = Vector{Any}(undef, mlen)
-	for i = 1:mlen
-		values_matrix[i] = Array{OrderedDict{String,String}}(undef,mht)
-	end
-
-	for i = 1:mlen
-		for j = 1:mht
-			values_matrix[i][j] = OrderedDict{String, String}()
-		end
-	end
-
-	return values_matrix
+	return make_dict_matrix(mlen,mht,String)
 end
 
 function set_values(value_matrix,prop,value,rows,cols)
-	
-	if isnothing(rows)
-		rows = 1:length(value_matrix)
-	end
-
-	if isnothing(cols)
-		cols = 1:length(value_matrix[1])
-	end
-
-	for i = 1:length(rows)
-		for j = 1:length(cols)
-			value_matrix[rows[i]][cols[j]][prop] = value
-		end
-	end
-	return value_matrix
+	return set_dict_matrix(value_matrix,prop,value,rows,cols)
 end
 
-function set_col_values(value_matrix,prop,value,cols)
-	return set_properties(value_matrix, prop, value, 1:length(value_matrix), cols)
-end
-
-function set_row_values(value_matrix, prop,value,rows)
-	return set_properties(value_matrix, prop, value, rows, 1:length(value_matrix[1]))
-end
-
-function set_all_values(property_matrix,prop,value)
-	return set_properties(property_matrix, prop, value, 1:length(property_matrix), 1:length(property_matrix[1]))
-end

@@ -1,6 +1,9 @@
 
-function write_table(dt,rtf_path)
-	update_string_matrix!(dt)
+function write_table(dt,rtf_path;update = true)
+	
+	if update
+		update_string_matrix!(dt)
+	end
 	string_matrix = dt.string_matrix
 	touch(rtf_path)
 	rtf_file = open(rtf_path,"w")

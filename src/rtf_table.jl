@@ -1,5 +1,3 @@
-project_path(parts...) = normpath(joinpath(@__DIR__, "..", parts...))
-
 mutable struct DataTable
 	property_matrix::Vector{Any}
 	value_matrix::Vector{Any}
@@ -55,6 +53,3 @@ function init_value_matrix!(property_matrix,df,nrow,ncol;leng_inch = 6.5)
 	return
 end
 
-function init_cellx(j,ncol,leng_inch)
-	return Int(round(j * (leng_inch * 1440 / ncol)))
-end
