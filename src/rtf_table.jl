@@ -4,7 +4,7 @@ mutable struct DataTable
 	string_matrix::Vector{Any}
 end
 
-function make_data_table(df)
+function make_data_table(df;header = true)
 	
 	nrow = size(df,1)
 	ncol = size(df,2)
@@ -15,6 +15,9 @@ function make_data_table(df)
 	init_value_matrix!(dt.value_matrix,df,nrow,ncol)
 	update_string_matrix!(dt)
 	
+	if(header)
+		add_row(dt,names(df),position = 0)
+	end
 	return dt
 end
 

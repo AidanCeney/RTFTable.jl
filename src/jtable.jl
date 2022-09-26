@@ -15,5 +15,5 @@ include("write_table.jl")
 include("set_border.jl")
 include("text_properties.jl")
 include("cell_properties.jl")
-
+include("table_mod.jl")
 end
