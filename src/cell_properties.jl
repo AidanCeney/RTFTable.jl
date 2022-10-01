@@ -14,6 +14,15 @@ function init_cellx(j,ncol,leng_inch)
 	return Int(round(j * (leng_inch * 1440 / ncol)))
 end
 
+function reset_col_width(dt)
+	
+	ncol         = dt.global_properties["ncol"]
+	doc_width    = dt.global_properties["doc_len"]
+	col_width    = Int(floor(doc_width * 1440 /ncol))
+	set_cell_width(dt,col_width)
+	return
+end
+
 function set_cell_width(dt,col_width;rows = Nothing(),cols = Nothing())
 	
 	if isnothing(cols)

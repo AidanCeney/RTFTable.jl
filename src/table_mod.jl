@@ -34,23 +34,29 @@ function add_df(dt,df;position = Nothing(),header = false,rowwise = true)
 	for i = 1:position
 		add_row_or_col!(new_property_matrix,dt.property_matrix,i,rowwise,i)
 		add_row_or_col!(new_value_matrix,dt.value_matrix,i,rowwise,i)
-		add_row_or_col!(new_string_matrix,dt.string_matrix,i,rowwise,i)
 	end
 
 	for i = (position+1):(position+new_add)
 		add_row_or_col!(new_property_matrix,new_dt.property_matrix,i-position,rowwise,i)
 		add_row_or_col!(new_value_matrix,new_dt.value_matrix,i-position,rowwise,i)
-		add_row_or_col!(new_string_matrix,new_dt.string_matrix,i-position,rowwise,i)
 	end
 
 	for i = (1+position+new_add):max_size
 		add_row_or_col!(new_property_matrix,dt.property_matrix,i-new_add,rowwise,i)
 		add_row_or_col!(new_value_matrix,dt.value_matrix,i-new_add,rowwise,i)
-		add_row_or_col!(new_string_matrix,dt.string_matrix,i-new_add,rowwise,i)
 	end
 	dt.property_matrix = new_property_matrix
 	dt.value_matrix    = new_value_matrix
-	dt.string_matrix    = new_string_matrix
+	if !rowwise
+		reset_col_width(dt)
+	end
+	
+	dt.global_properties["nrow"] = nrow
+	dt.global_properties["ncol"] = ncol
+
+	update_string_matrix!(dt)
+
+	
 	return dt
 end
 

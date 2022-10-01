@@ -5,6 +5,7 @@ project_path(parts...) = normpath(joinpath(@__DIR__, "..", parts...))
 
 import DataFrames
 import YAML
+import PrettyTables
 using  DataStructures
 
 include("rtf_table.jl")

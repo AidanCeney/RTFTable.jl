@@ -33,6 +33,31 @@ function set_dict_matrix(dict_matrix,prop,set,rows,cols)
 	return dict_matrix
 end
 
+function getAll(dict_matrix,field)
+	
+	ret = []
+	tmp = []
+	nrow = length(dict_matrix)
+	ncol = length(dict_matrix[1])
+	
+	for i = 1:nrow
+		for j = 1:ncol
+			if j == 1
+				tmp  = [dict_matrix[i][j][field]]
+			else
+				tmp = [tmp dict_matrix[i][j][field]]
+			end
+		end
+		if i == 1
+			ret = tmp
+		else
+			ret = [ret;tmp]
+		end
+		tmp = []
+	end
+	return ret
+end
+
 function make_property_matrix(mlen,mht)
 	return make_dict_matrix(mlen,mht,Bool)
 end

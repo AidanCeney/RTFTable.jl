@@ -11,7 +11,7 @@ function make_data_table(df;header = true,len = 6.5)
 	ncol = size(df,2)
 
 	global_properties = Dict{String,Any}()
-	global_properties["nrow"] = nrow + header
+	global_properties["nrow"] = nrow 
 	global_properties["ncol"] = ncol
 	global_properties["doc_len"] = len
 	
@@ -22,7 +22,8 @@ function make_data_table(df;header = true,len = 6.5)
 	update_string_matrix!(dt)
 	
 	if(header)
-		add_row(dt,names(df),position = 0)
+		add_row(dt,names(df),position = 0);
+		dt.global_properties["nrow"] = nrow + 1
 	end
 	return dt
 end
@@ -62,3 +63,6 @@ function init_value_matrix!(property_matrix,df,nrow,ncol,len)
 	return
 end
 
+function Base.show(io::IO, z::DataTable)
+	print(io,PrettyTables.pretty_table(getAll(z.value_matrix,"value")))
+end

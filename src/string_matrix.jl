@@ -4,8 +4,8 @@ function update_string_matrix!(dt)
 
 	properties_matrix = dt.property_matrix
 	value_matrix      = dt.value_matrix	
-	nrow              = length(properties_matrix)
-	ncol              = length(properties_matrix[1])
+	nrow              = dt.global_properties["nrow"]
+	ncol              = dt.global_properties["ncol"]
 	string_matrix     = make_string_matrix(nrow,ncol) 
 
 	for i = 1:nrow
