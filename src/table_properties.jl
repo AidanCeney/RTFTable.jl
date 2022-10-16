@@ -39,7 +39,17 @@ function left_border_width(str_matrix,value,i,j)
 end
 
 function value(str_matrix,value,i,j)
-	str_matrix[i][j][2] = str_matrix[i][j][2] * "{" * value * "}"
+	str_matrix[i][j][2] = str_matrix[i][j][2] * "{" *  value * "}" 
+	return
+end
+
+function bracket_open(str_matrix,value,i,j)
+	str_matrix[i][j][2] = str_matrix[i][j][2] * "{" 
+	return
+end
+
+function bracket_close(str_matrix,value,i,j)
+	str_matrix[i][j][2] = str_matrix[i][j][2] * "}" 
 	return
 end
 
@@ -89,22 +99,12 @@ function bold(str_matrix,value,i,j)
 	return
 end
 
-function close_bold(str_matrix,value,i,j)
-	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\b"
-	return
-end
-
 function italic(str_matrix,value,i,j)
 	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\i"
 	return
 end
 
-function close_italic(str_matrix,value,i,j)
-	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\i"
-	return
-end
-
 function font(str_matrix,value,i,j)
-	str_matrix[i][j] = str_matrix[i][j]
+	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\f" * value
 end
 

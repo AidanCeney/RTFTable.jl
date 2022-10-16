@@ -29,13 +29,13 @@ end
 function get_font_table(dt)
 	
 	fonts = dt.global_properties["fonts"]
-	ret = "(\fonttbl\n"
+	ret = "\n{\\fonttbl\n"
 	count = 0
 
 	
 	for i in 1:length(fonts)
 		ret = ret * "{\\f" * string(floor(i)) * " " * fonts[i] * ";}\n"
 	end
-	ret = "}\n"
+	ret =  ret * "}\n"
 	return ret
 end

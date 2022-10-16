@@ -39,7 +39,10 @@ right_align:
   value: 
 justify_align:
   onoff: false
-  value: 
+  value:
+bracket_open:
+  onoff: true
+  value:  
 bold:
   onoff: false
   value: 
@@ -55,12 +58,9 @@ font:
 value:
   onoff: true
   value: 
-close_bold:
-  onoff: false
-  value: 
-close_italic:
-  onoff: false
-  value: 
+bracket_close:
+  onoff: true
+  value:  
 cellx:
   onoff: true
   value:

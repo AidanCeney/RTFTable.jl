@@ -14,7 +14,7 @@ function make_data_table(df;header = true,len = 6.5)
 	global_properties["nrow"] = nrow 
 	global_properties["ncol"] = ncol
 	global_properties["doc_len"] = len
-	
+	global_properties["fonts"] = Vector{String}()
 	dt = DataTable(make_property_matrix(nrow,ncol),make_value_matrix(nrow,ncol),make_string_matrix(nrow,ncol),global_properties)
 
 	init_property_matrix!(dt,nrow,ncol)
@@ -55,8 +55,10 @@ function init_value_matrix!(dt,df,nrow,ncol,len)
 				elseif prop == "cellx"
 					set_values(dt.value_matrix,prop,string(init_cellx(j,ncol,len)),i,j)
 				elseif prop == "font"
-					set_values(dt.value_matrix,prop,"0",i,j)
-					dt.global_properties["fonts"] = dict["value"]
+					set_values(dt.value_matrix,prop,"1",i,j)
+					if length(dt.global_properties["fonts"]) == 0
+						push!(dt.global_properties["fonts"],string(dict["value"]))
+					end
 				else
 					set_values(dt.value_matrix,prop,string(dict["value"]),i,j)
 				end
