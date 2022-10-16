@@ -104,3 +104,7 @@ function close_italic(str_matrix,value,i,j)
 	return
 end
 
+function font(str_matrix,value,i,j)
+	str_matrix[i][j] = str_matrix[i][j]
+end
+

@@ -7,6 +7,16 @@ function set_font_size(dt,font_size;rows = Nothing(),cols = Nothing())
 	return
 end
 
+function set_font(dt,font;rows = Nothing(),cols = Nothing())
+	if !font in dt.global_properties["fonts"] 
+		append!(dt.global_properties["fonts"],font)
+	end
+	property_matrix = dt.property_matrix
+	value_matrix    = dt.value_matrix
+	set_values(value_matrix,indexin(font,dt.global_properties["fonts"]),rows,cols)
+	return
+end
+
 function set_alignment(dt,align;rows = Nothing(),cols = Nothing())
 
 	property_matrix = dt.property_matrix

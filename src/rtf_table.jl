@@ -17,8 +17,8 @@ function make_data_table(df;header = true,len = 6.5)
 	
 	dt = DataTable(make_property_matrix(nrow,ncol),make_value_matrix(nrow,ncol),make_string_matrix(nrow,ncol),global_properties)
 
-	init_property_matrix!(dt.property_matrix,nrow,ncol)
-	init_value_matrix!(dt.value_matrix,df,nrow,ncol,len)
+	init_property_matrix!(dt,nrow,ncol)
+	init_value_matrix!(dt,df,nrow,ncol,len)
 	update_string_matrix!(dt)
 	
 	if(header)
@@ -29,21 +29,21 @@ function make_data_table(df;header = true,len = 6.5)
 end
 
 
-function init_property_matrix!(property_matrix,nrow,ncol)
-	
+function init_property_matrix!(dt,nrow,ncol)
+
 	config_properties = YAML.load_file(project_path("config/init_properties.yaml"),dicttype=OrderedDict)
 
 	for i = 1:nrow
 		for j = 1:ncol
 			for (prop,dict)  = config_properties
-				set_properties(property_matrix,prop,dict["onoff"],i,j)
+				set_properties(dt.property_matrix,prop,dict["onoff"],i,j)
 			end
 		end
 	end
 	return
 end
 
-function init_value_matrix!(property_matrix,df,nrow,ncol,len)
+function init_value_matrix!(dt,df,nrow,ncol,len)
 
 	config_properties = YAML.load_file(project_path("config/init_properties.yaml"),dicttype=OrderedDict)
 	
@@ -51,11 +51,14 @@ function init_value_matrix!(property_matrix,df,nrow,ncol,len)
 		for j = 1:ncol
 			for (prop, dict) in config_properties 	
 				if prop == "value"
-					set_values(property_matrix,prop,string(df[i,j]),i,j)
+					set_values(dt.value_matrix,prop,string(df[i,j]),i,j)
 				elseif prop == "cellx"
-					set_values(property_matrix,prop,string(init_cellx(j,ncol,len)),i,j)
+					set_values(dt.value_matrix,prop,string(init_cellx(j,ncol,len)),i,j)
+				elseif prop == "font"
+					set_values(dt.value_matrix,prop,"0",i,j)
+					dt.global_properties["fonts"] = dict["value"]
 				else
-					set_values(property_matrix,prop,string(dict["value"]),i,j)
+					set_values(dt.value_matrix,prop,string(dict["value"]),i,j)
 				end
 			end
 		end
@@ -64,5 +67,18 @@ function init_value_matrix!(property_matrix,df,nrow,ncol,len)
 end
 
 function Base.show(io::IO, z::DataTable)
-	print(io,PrettyTables.pretty_table(getAll(z.value_matrix,"value")))
+
+
+	Values = getAll(z.value_matrix,"value")
+	header = Values[1,:]
+	Values = Values[2:size(Values,1),:]
+
+	Borders_bottom = getAll(z.property_matrix,"bottom_border")
+	Borders_top    = getAll(z.property_matrix,"top_border")
+	Borders_right  = getAll(z.property_matrix,"left_border")
+	Borders_left   = getAll(z.property_matrix,"right_border")
+
+
+	
+	print(io,PrettyTables.pretty_table(Values,header = header))
 end
