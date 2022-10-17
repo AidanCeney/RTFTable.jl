@@ -32,6 +32,7 @@ function set_alignment(dt,align;rows = Nothing(),cols = Nothing())
 		set_properties(property_matrix,a*"_align",false,rows,cols)
 	end
 	set_properties(property_matrix,align*"_align",true,rows,cols)
+	return
 end
 
 function set_bold(dt;onoff = true,rows = Nothing(),cols = Nothing())
