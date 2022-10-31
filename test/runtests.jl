@@ -1,6 +1,9 @@
 using Test
 using DataFrames
 using jtable
+using DataStructures
+include("test-dict-matrix.jl")
+include("test-cell-properties.jl")
 @testset "BasicTests" begin
 	project_path(parts...) = normpath(joinpath(@__DIR__, "..", parts...))
 	df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])

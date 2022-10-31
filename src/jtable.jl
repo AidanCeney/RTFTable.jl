@@ -2,6 +2,7 @@ module jtable
 
 
 project_path(parts...) = normpath(joinpath(@__DIR__, "..", parts...))
+inch_twip_ratio = 1440
 
 import DataFrames
 import YAML

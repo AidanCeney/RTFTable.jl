@@ -1,5 +1,9 @@
-function merge_cols(dt,rows,cols)
+function merge_cols(dt; rows = Nothing(),cols = Nothing())
 	
+	if isnothing(cols)
+		cols = 1:length(dt.property_matrix[1])
+	end
+
 	property_matrix = dt.property_matrix
 	value_matrix    = dt.value_matrix
 	set_properties(property_matrix,"clmgf",true,rows,cols[1])
@@ -11,7 +15,7 @@ function merge_cols(dt,rows,cols)
 end
 
 function init_cellx(j,ncol,leng_inch)
-	return Int(round(j * (leng_inch * 1440 / ncol)))
+	return Int(round(j * (leng_inch * inch_twip_ratio / ncol)))
 end
 
 function reset_col_width(dt)
@@ -25,19 +29,37 @@ end
 
 function set_cell_width(dt,col_width;rows = Nothing(),cols = Nothing())
 	
+	col_width = col_width * inch_twip_ratio
+	
 	if isnothing(cols)
 		cols = 1:length(dt.property_matrix[1])
 	end
-
+	
+	if isnothing(rows)
+		rows = 1:length(dt.property_matrix)
+	end
 
 	if(length(col_width) != length(cols))
 		col_width = repeat([col_width],length(cols))
 	end
-	
-	width_val = 0
-	for i = 1:length(cols)
-		width_val += col_width[i]
-		set_values(dt.value_matrix,"cellx",string(width_val),rows,cols[i])
+
+	orig_width = getAll(dt.value_matrix,"cellx")	
+
+	for i = eachindex(rows)
+		width_val = 0		
+		new_width = map(x->parse(Int64,x),orig_width[rows[i],:])
+		prev = 0
+		for w = eachindex(new_width)
+			tmp = new_width[w]
+			new_width[w] = new_width[w] - prev
+			prev = tmp
+		end
+		new_width[cols] = length(col_width) > 1 ? col_width : col_width[1]
+
+		for j = eachindex(dt.property_matrix[1])
+			width_val += new_width[j]
+			set_values(dt.value_matrix,"cellx",string(width_val),rows[i],j)
+		end
 	end
 	return
 end
