@@ -2,10 +2,14 @@ using Test
 using DataFrames
 using jtable
 using DataStructures
+
+project_path(parts...) = normpath(joinpath(@__DIR__, "..", parts...))
+
 include("test-dict-matrix.jl")
 include("test-cell-properties.jl")
+include("test-text-properties.jl")
+
 @testset "BasicTests" begin
-	project_path(parts...) = normpath(joinpath(@__DIR__, "..", parts...))
 	df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
 	dt = jtable.make_data_table(df)
 	jtable.set_borders!(dt)
