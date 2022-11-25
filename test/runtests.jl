@@ -8,6 +8,7 @@ project_path(parts...) = normpath(joinpath(@__DIR__, "..", parts...))
 include("test-dict-matrix.jl")
 include("test-cell-properties.jl")
 include("test-text-properties.jl")
+include("test-title-footer.jl")
 
 @testset "BasicTests" begin
 	df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])

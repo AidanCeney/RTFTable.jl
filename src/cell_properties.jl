@@ -8,8 +8,8 @@ function merge_cols(dt; rows = Nothing(),cols = Nothing())
 	value_matrix    = dt.value_matrix
 	set_properties(property_matrix,"clmgf",true,rows,cols[1])
 	set_properties(property_matrix,"clmrg",true,rows,cols[2:length(cols)])
-	for i = 1:length(rows)
-		set_values(value_matrix,"value",value_matrix[i][cols[1]]["value"],i,cols[2:length(cols)])
+	for i in rows
+		set_values(value_matrix,"value","",i,cols[2:length(cols)])
 	end
 	return
 end
