@@ -75,12 +75,5 @@ function Base.show(io::IO, z::DataTable)
 	header = Values[1,:]
 	Values = Values[2:size(Values,1),:]
 
-	Borders_bottom = getAll(z.property_matrix,"bottom_border")
-	Borders_top    = getAll(z.property_matrix,"top_border")
-	Borders_right  = getAll(z.property_matrix,"left_border")
-	Borders_left   = getAll(z.property_matrix,"right_border")
-
-
-	
 	print(io,PrettyTables.pretty_table(Values,header = header))
 end
