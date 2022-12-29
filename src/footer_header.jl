@@ -1,4 +1,4 @@
-function add_footer_or_title(dt,footer, text, font, font_size)
+function add_footer_or_title(dt::jtable.DataTable,footer::Bool, text::String, font::Union{String,Nothing}, font_size::Int)
     
     font = isnothing(font) ? dt.global_properties["fonts"][1] : font
     ncol = length(dt.property_matrix[1])
@@ -13,12 +13,12 @@ function add_footer_or_title(dt,footer, text, font, font_size)
     return 
 end
 
-function add_footer(dt, text; font = Nothing(),font_size = 20)
+function add_footer!(dt::jtable.DataTable, text; font::Union{String, Nothing} = Nothing(),font_size::Int = 20)
     add_footer_or_title(dt, true, text, font, font_size)
     return 
 end
 
-function add_title(dt, text; font = Nothing(),font_size = 28)
+function add_title!(dt::jtable.DataTable, text::String; font::Union{String, Nothing} = Nothing(),font_size::Int = 28)
     add_footer_or_title(dt, false, text, font, font_size)
     return 
 end

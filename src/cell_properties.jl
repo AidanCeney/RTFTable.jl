@@ -1,4 +1,4 @@
-function merge_cols(dt; rows = Nothing(),cols = Nothing())
+function merge_cols(dt::jtable.DataTable; rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	
 	if isnothing(cols)
 		cols = 1:length(dt.property_matrix[1])
@@ -14,20 +14,20 @@ function merge_cols(dt; rows = Nothing(),cols = Nothing())
 	return
 end
 
-function init_cellx(j,ncol,leng_inch)
+function init_cellx(j::Int,ncol::Int,leng_inch::Float64)
 	return Int(round(j * (leng_inch * inch_twip_ratio / ncol)))
 end
 
-function reset_col_width(dt)
+function reset_col_width(dt::jtable.DataTable)
 	
 	ncol         = dt.global_properties["ncol"]
 	doc_width    = dt.global_properties["doc_len"]
 	col_width    = Int(floor(doc_width * 1440 /ncol))
-	set_cell_width(dt,col_width)
+	set_cell_width(dt::jtable.DataTable,col_width)
 	return
 end
 
-function set_cell_width(dt,col_width;rows = Nothing(),cols = Nothing())
+function set_cell_width(dt::jtable.DataTable,col_width::Union{Float64,Vector{Float64}};rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	
 	col_width = col_width * inch_twip_ratio
 	
@@ -54,12 +54,30 @@ function set_cell_width(dt,col_width;rows = Nothing(),cols = Nothing())
 			new_width[w] = new_width[w] - prev
 			prev = tmp
 		end
-		new_width[cols] = length(col_width) > 1 ? col_width : col_width[1]
+		new_width[cols] .= col_width 
 
 		for j = eachindex(dt.property_matrix[1])
 			width_val += new_width[j]
 			set_values(dt.value_matrix,"cellx",string(width_val),rows[i],j)
 		end
 	end
+	return
+end
+
+function add_padding(dt::jtable.DataTable, onoff::Bool, value::Int;sides::Vector{String} = ["b" "l" "t" "r"], rows::Union{Vector{Int}, Int, Nothing}= Nothing(), cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+	
+	border_map = Dict("b" => "bottom",
+			  		  "l" => "left",
+			  		  "t" => "top",
+			  		  "r" => "right")
+	for side in sides
+		set_properties(dt.property_matrix,border_map[side] * "_padding", onoff, rows, cols)
+		set_values(dt.value_matrix, border_map[side] * "_padding", string(value), rows, cols)
+	end
+	return
+end
+
+function write_padding(str_matrix::Array, i::Int, j::Int, border_id::String, value::String)
+	str_matrix[i][j][1] = str_matrix[i][j][1] * "\\clpadf" * border_id * "3\\clpad" * border_id * value
 	return
 end

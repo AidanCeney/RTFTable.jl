@@ -1,4 +1,4 @@
-function write_table(dt,rtf_path;update = true)
+function write_table(dt::jtable.DataTable,rtf_path;update = true)
 	
 	if update
 		update_string_matrix!(dt)

@@ -1,8 +1,8 @@
 
-@testset "add_footer" begin
+@testset "add_footer!" begin
     df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
     dt = jtable.make_data_table(df)
-	jtable.add_footer(dt,"Test",font = "Times",font_size = 10)
+	jtable.add_footer!(dt::jtable.DataTable,"Test",font = "Times",font_size = 10)
 	@test length(dt.property_matrix) == 6
 	aTest = jtable.getAll(dt.value_matrix,"value")
     aTest = aTest[6,:]
@@ -21,10 +21,10 @@
     @test aTest == ["20", "20"]
 end;
 
-@testset "add_header" begin
+@testset "add_title!" begin
     df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
     dt = jtable.make_data_table(df)
-	jtable.add_title(dt,"Test",font = "Times",font_size = 10)
+	jtable.add_title!(dt::jtable.DataTable,"Test",font = "Times",font_size = 10)
 	@test length(dt.property_matrix) == 6
 	aTest = jtable.getAll(dt.value_matrix,"value")
     aTest = aTest[1,:]

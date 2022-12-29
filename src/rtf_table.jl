@@ -5,7 +5,7 @@ mutable struct DataTable
 	global_properties::Dict{String, Any}
 end
 
-function make_data_table(df;header = true,len = 6.5)
+function make_data_table(df::DataFrames.AbstractDataFrame;header::Bool = true,len::Float64 = 6.5)
 	
 	nrow = size(df,1)
 	ncol = size(df,2)
@@ -17,19 +17,19 @@ function make_data_table(df;header = true,len = 6.5)
 	global_properties["fonts"] = Vector{String}()
 	dt = DataTable(make_property_matrix(nrow,ncol),make_value_matrix(nrow,ncol),make_string_matrix(nrow,ncol),global_properties)
 
-	init_property_matrix!(dt,nrow,ncol)
-	init_value_matrix!(dt,df,nrow,ncol,len)
+	init_property_matrix!(dt::jtable.DataTable,nrow,ncol)
+	init_value_matrix!(dt::jtable.DataTable,df,nrow,ncol,len)
 	update_string_matrix!(dt)
 	
 	if(header)
-		add_row(dt,names(df),position = 0);
+		add_row(dt::jtable.DataTable,names(df),position = 0);
 		dt.global_properties["nrow"] = nrow + 1
 	end
 	return dt
 end
 
 
-function init_property_matrix!(dt,nrow,ncol)
+function init_property_matrix!(dt::jtable.DataTable,nrow::Int,ncol::Int)
 
 	config_properties = YAML.load_file(project_path("config/init_properties.yaml"),dicttype=OrderedDict)
 
@@ -43,7 +43,7 @@ function init_property_matrix!(dt,nrow,ncol)
 	return
 end
 
-function init_value_matrix!(dt,df,nrow,ncol,len)
+function init_value_matrix!(dt::jtable.DataTable,df::DataFrames.AbstractDataFrame,nrow::Int,ncol::Int,len::Float64)
 
 	config_properties = YAML.load_file(project_path("config/init_properties.yaml"),dicttype=OrderedDict)
 	

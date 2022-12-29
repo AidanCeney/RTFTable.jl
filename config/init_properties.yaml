@@ -28,6 +28,18 @@ bottom_border:
 bottom_border_width:
   onoff: false
   value: 10
+left_padding:
+  onoff: false
+  value: 10
+top_padding:
+  onoff: false
+  value: 10
+right_padding:
+  onoff: false
+  value: 10
+bottom_border:
+  onoff: false
+  value: 10
 left_align:
   onoff: true
   value: 

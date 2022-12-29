@@ -1,5 +1,15 @@
-function add_df(dt,df;position = Nothing(),header = false,rowwise = true)
+function add_df!(dt::jtable.DataTable,df;position::Union{Nothing,Int} = Nothing(),header::Bool = false,rowwise::Bool = true)	
 	
+	if rowwise
+		if(DataFrames.ncol(df) != length(dt.property_matrix[1]))
+			error("When adding new rows number of columns must match")
+		end
+	else
+		if(DataFrames.nrow(df) != length(dt.property_matrix))
+			error("When adding new columns number of rows must match")
+		end
+	end
+
 	if isnothing(position)
 		if rowwise
 			position = length(dt.property_matrix)
@@ -9,8 +19,6 @@ function add_df(dt,df;position = Nothing(),header = false,rowwise = true)
 	end
 
 	new_dt              = make_data_table(df,header = header)
-	property_matrix     = dt.property_matrix
-	value_matrix        = dt.value_matrix
 	
 	nrow = length(dt.property_matrix)
 	ncol = length(dt.property_matrix[1])
@@ -60,15 +68,23 @@ function add_df(dt,df;position = Nothing(),header = false,rowwise = true)
 	return dt
 end
 
-function add_row(dt,rows;position = Nothing())
-	df = DataFrames.DataFrame(reshape(rows,1,:),:auto)
-	new_dt = add_df(dt,df,position = position)
+function add_row(dt::jtable.DataTable,row::Vector;position::Union{Nothing,Int} = Nothing())
+	df = DataFrames.DataFrame(reshape(row,1,:),:auto)
+	new_dt = add_df!(dt::jtable.DataTable,df,position = position)
 	dt.property_matrix = new_dt.property_matrix
 	dt.value_matrix    = new_dt.value_matrix
 	return dt
 end
 
-function add_row_or_col!(matrix,new_matrix,new_vec_pos,add_row,i)
+function add_col(dt::jtable.DataTable,col::Vector;position::Union{Nothing,Int} = Nothing())
+	df = DataFrames.DataFrame(reshape(col,:,1),:auto)
+	new_dt = add_df!(dt::jtable.DataTable,df,position = position,rowwise = false)
+	dt.property_matrix = new_dt.property_matrix
+	dt.value_matrix    = new_dt.value_matrix
+	return dt
+end
+
+function add_row_or_col!(matrix::Vector,new_matrix::Vector,new_vec_pos::Int,add_row::Bool,i::Int)
 	if add_row
 		matrix[i] = new_matrix[new_vec_pos]
 		return matrix
