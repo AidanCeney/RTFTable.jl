@@ -36,7 +36,11 @@ function init_property_matrix!(dt::jtable.DataTable,nrow::Int,ncol::Int)
 	for i = 1:nrow
 		for j = 1:ncol
 			for (prop,dict)  = config_properties
-				set_properties(dt.property_matrix,prop,dict["onoff"],i,j)
+				if !isnothing(get_property_default_onoff(prop))
+					set_properties(dt.property_matrix,prop,get_property_default_onoff(prop),i,j)
+				else
+					set_properties(dt.property_matrix,prop,dict["onoff"],i,j)
+				end
 			end
 		end
 	end
@@ -57,10 +61,18 @@ function init_value_matrix!(dt::jtable.DataTable,df::DataFrames.AbstractDataFram
 				elseif prop == "font"
 					set_values(dt.value_matrix,prop,"1",i,j)
 					if length(dt.global_properties["fonts"]) == 0
-						push!(dt.global_properties["fonts"],string(dict["value"]))
+						if !isnothing(get_property_default_value(prop))
+							push!(dt.global_properties["fonts"],get_property_default_value(prop))					
+						else
+							push!(dt.global_properties["fonts"],string(dict["value"]))
+						end
 					end
 				else
-					set_values(dt.value_matrix,prop,string(dict["value"]),i,j)
+					if !isnothing(get_property_default_value(prop))
+						set_values(dt.value_matrix,prop,get_property_default_value(prop),i,j)
+					else
+						set_values(dt.value_matrix,prop,string(dict["value"]),i,j)
+					end
 				end
 			end
 		end

@@ -8,7 +8,9 @@ import DataFrames
 import YAML
 import PrettyTables
 using  DataStructures
+using Preferences
 
+include("properties_settings.jl")
 include("rtf_table.jl")
 include("properties_matrix.jl")
 include("string_matrix.jl")
