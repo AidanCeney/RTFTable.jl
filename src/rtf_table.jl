@@ -33,15 +33,11 @@ function init_property_matrix!(dt::jtable.DataTable,nrow::Int,ncol::Int)
 
 	config_properties = YAML.load_file(project_path("config/init_properties.yaml"),dicttype=OrderedDict)
 
-	for i = 1:nrow
-		for j = 1:ncol
-			for (prop,dict)  = config_properties
-				if !isnothing(get_property_default_onoff(prop))
-					set_properties(dt.property_matrix,prop,get_property_default_onoff(prop),i,j)
-				else
-					set_properties(dt.property_matrix,prop,dict["onoff"],i,j)
-				end
-			end
+	for (prop,dict)  = config_properties
+		if !isnothing(get_property_default_onoff(prop))
+			set_properties(dt.property_matrix,prop,get_property_default_onoff(prop),Nothing(),Nothing())
+		else
+			set_properties(dt.property_matrix,prop,dict["onoff"],Nothing(),Nothing())
 		end
 	end
 	return
@@ -50,30 +46,30 @@ end
 function init_value_matrix!(dt::jtable.DataTable,df::DataFrames.AbstractDataFrame,nrow::Int,ncol::Int,len::Float64)
 
 	config_properties = YAML.load_file(project_path("config/init_properties.yaml"),dicttype=OrderedDict)
-	
-	for i = 1:nrow
-		for j = 1:ncol
-			for (prop, dict) in config_properties 	
-				if prop == "value"
+		
+	for (prop, dict) in config_properties 	
+		if prop == "value"
+			for i in eachindex(dt.property_matrix)
+				for j in eachindex(dt.property_matrix[1])
 					set_values(dt.value_matrix,prop,string(df[i,j]),i,j)
-				elseif prop == "cellx"
-					set_values(dt.value_matrix,prop,string(init_cellx(j,ncol,len)),i,j)
-				elseif prop == "font"
-					set_values(dt.value_matrix,prop,"1",i,j)
-					if length(dt.global_properties["fonts"]) == 0
-						if !isnothing(get_property_default_value(prop))
-							push!(dt.global_properties["fonts"],get_property_default_value(prop))					
-						else
-							push!(dt.global_properties["fonts"],string(dict["value"]))
-						end
-					end
-				else
-					if !isnothing(get_property_default_value(prop))
-						set_values(dt.value_matrix,prop,get_property_default_value(prop),i,j)
-					else
-						set_values(dt.value_matrix,prop,string(dict["value"]),i,j)
-					end
 				end
+			end
+		elseif prop == "cellx"
+			for j in eachindex(dt.property_matrix[1])
+				set_values(dt.value_matrix,prop,string(init_cellx(j,ncol,len)),Nothing(),j)
+			end
+		elseif prop == "font"
+			set_values(dt.value_matrix,prop,"1",Nothing(),Nothing())
+			if !isnothing(get_property_default_value(prop))
+				push!(dt.global_properties["fonts"],get_property_default_value(prop))					
+			else
+				push!(dt.global_properties["fonts"],string(dict["value"]))
+			end
+		else
+			if !isnothing(get_property_default_value(prop))
+				set_values(dt.value_matrix,prop,get_property_default_value(prop),Nothing(),Nothing())
+			else
+				set_values(dt.value_matrix,prop,string(dict["value"]),Nothing(),Nothing())
 			end
 		end
 	end
