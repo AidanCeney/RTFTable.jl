@@ -50,3 +50,31 @@ function set_italic(dt;onoff::Bool = true,rows::Union{Vector{Int}, Int, Nothing}
 	return
 end
 
+
+function set_font_color(dt;red::Int = 0,green::Int = 0,blue::Int = 0,onoff::Bool = true,rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())	
+	
+	property_matrix = dt.property_matrix
+	value_matrix    = dt.value_matrix
+
+	if red > 255 ||  blue > 255 || green > 255 || red < 0 || green < 0 || blue < 0
+		error("RGB values must be a value between 0 and 255")
+	end
+	
+	color_string = "\\red" * string(red) * "\\green" * string(green) * "\\blue" * string(blue)
+	
+	if !(color_string in dt.global_properties["fontcolors"]) 
+		push!(dt.global_properties["fontcolors"],color_string)
+	end
+	
+	index = 1
+	for f in dt.global_properties["fontcolors"]
+		if color_string == f
+			break
+		end
+		index = index + 1
+	end
+	
+	set_properties(property_matrix,"fontcolor",onoff,rows,cols)
+	set_values(value_matrix,"fontcolor",string(index),rows,cols)
+	return
+end

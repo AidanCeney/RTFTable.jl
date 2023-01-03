@@ -91,6 +91,11 @@ function fs(str_matrix,value,i,j)
 	return
 end
 
+function fontcolor(str_matrix,value,i,j)
+	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\cf" * value
+	return
+end
+
 function left_align(str_matrix::Vector,value::String,i::Int,j::Int)
 	str_matrix[i][j][2] = str_matrix[i][j][2] * "\\ql"  
 	return

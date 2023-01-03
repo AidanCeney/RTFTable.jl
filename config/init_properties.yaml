@@ -64,6 +64,9 @@ italic:
 fs:
   onoff: true
   value: 20
+fontcolor:
+  onoff: false
+  value: 
 font:
   onoff: true
   value: Arial

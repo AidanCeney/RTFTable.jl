@@ -15,6 +15,8 @@ function make_data_table(df::DataFrames.AbstractDataFrame;header::Bool = true,le
 	global_properties["ncol"] = ncol
 	global_properties["doc_len"] = len
 	global_properties["fonts"] = Vector{String}()
+	global_properties["fontcolors"] = Vector{String}()
+	push!(global_properties["fontcolors"],"\\red0\\green0\\blue0")
 	dt = DataTable(make_property_matrix(nrow,ncol),make_value_matrix(nrow,ncol),make_string_matrix(nrow,ncol),global_properties)
 
 	init_property_matrix!(dt::jtable.DataTable,nrow,ncol)
