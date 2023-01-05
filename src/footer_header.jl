@@ -7,9 +7,9 @@ function add_footer_or_title(dt::jtable.DataTable,footer::Bool, text::String, fo
     new_row[1] = text
     add_row(dt,new_row,position = row_pos)
     row_n = footer ? length(dt.property_matrix) : 1
-    merge_cols(dt,rows = row_n)
-    set_font(dt, font, rows = row_n)
-    set_font_size(dt, font_size, rows = row_n)
+    merge_cols!(dt,rows = row_n)
+    set_font!(dt, font, rows = row_n)
+    set_font!_size!(dt, font_size, rows = row_n)
     return 
 end
 

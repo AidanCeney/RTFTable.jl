@@ -35,9 +35,9 @@ function add_df!(dt::jtable.DataTable,df;position::Union{Nothing,Int} = Nothing(
 		new_add  = length(new_dt.property_matrix[1])
 	end
 
-	new_property_matrix  = make_property_matrix(nrow,ncol)
-	new_value_matrix     = make_value_matrix(nrow,ncol)
-	new_string_matrix    = make_string_matrix(nrow,ncol)
+	new_property_matrix  = make_property_matrix!(nrow,ncol)
+	new_value_matrix     = make_value_matrix!(nrow,ncol)
+	new_string_matrix    = make_string_matrix!(nrow,ncol)
 
 	for i = 1:position
 		add_row_or_col!(new_property_matrix,dt.property_matrix,i,rowwise,i)

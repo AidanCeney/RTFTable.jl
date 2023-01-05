@@ -17,7 +17,7 @@ function make_data_table(df::DataFrames.AbstractDataFrame;header::Bool = true,le
 	global_properties["fonts"] = Vector{String}()
 	global_properties["fontcolors"] = Vector{String}()
 	push!(global_properties["fontcolors"],"\\red0\\green0\\blue0")
-	dt = DataTable(make_property_matrix(nrow,ncol),make_value_matrix(nrow,ncol),make_string_matrix(nrow,ncol),global_properties)
+	dt = DataTable(make_property_matrix!(nrow,ncol),make_value_matrix!(nrow,ncol),make_string_matrix!(nrow,ncol),global_properties)
 
 	init_property_matrix!(dt::jtable.DataTable,nrow,ncol)
 	init_value_matrix!(dt::jtable.DataTable,df,nrow,ncol,len)
@@ -37,9 +37,9 @@ function init_property_matrix!(dt::jtable.DataTable,nrow::Int,ncol::Int)
 
 	for (prop,dict)  = config_properties
 		if !isnothing(get_property_default_onoff(prop))
-			set_properties(dt.property_matrix,prop,get_property_default_onoff(prop),Nothing(),Nothing())
+			set_properties!(dt.property_matrix,prop,get_property_default_onoff(prop),Nothing(),Nothing())
 		else
-			set_properties(dt.property_matrix,prop,dict["onoff"],Nothing(),Nothing())
+			set_properties!(dt.property_matrix,prop,dict["onoff"],Nothing(),Nothing())
 		end
 	end
 	return
@@ -53,15 +53,15 @@ function init_value_matrix!(dt::jtable.DataTable,df::DataFrames.AbstractDataFram
 		if prop == "value"
 			for i in eachindex(dt.property_matrix)
 				for j in eachindex(dt.property_matrix[1])
-					set_values(dt.value_matrix,prop,string(df[i,j]),i,j)
+					set_values!(dt.value_matrix,prop,string(df[i,j]),i,j)
 				end
 			end
 		elseif prop == "cellx"
 			for j in eachindex(dt.property_matrix[1])
-				set_values(dt.value_matrix,prop,string(init_cellx(j,ncol,len)),Nothing(),j)
+				set_values!(dt.value_matrix,prop,string(init_cellx(j,ncol,len)),Nothing(),j)
 			end
 		elseif prop == "font"
-			set_values(dt.value_matrix,prop,"1",Nothing(),Nothing())
+			set_values!(dt.value_matrix,prop,"1",Nothing(),Nothing())
 			if !isnothing(get_property_default_value(prop))
 				push!(dt.global_properties["fonts"],get_property_default_value(prop))					
 			else
@@ -69,9 +69,9 @@ function init_value_matrix!(dt::jtable.DataTable,df::DataFrames.AbstractDataFram
 			end
 		else
 			if !isnothing(get_property_default_value(prop))
-				set_values(dt.value_matrix,prop,get_property_default_value(prop),Nothing(),Nothing())
+				set_values!(dt.value_matrix,prop,get_property_default_value(prop),Nothing(),Nothing())
 			else
-				set_values(dt.value_matrix,prop,string(dict["value"]),Nothing(),Nothing())
+				set_values!(dt.value_matrix,prop,string(dict["value"]),Nothing(),Nothing())
 			end
 		end
 	end

@@ -12,10 +12,10 @@ function set_borders!(dt;rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols:
 	property_matrix = dt.property_matrix
 	value_matrix    = dt.value_matrix
 	for border in sides
-		set_properties(property_matrix,border_map[border]*"_border",onoff,rows,cols)
+		set_properties!(property_matrix,border_map[border]*"_border",onoff,rows,cols)
 		if !isnothing(border_width)
-			set_properties(property_matrix,border_map[border]*"_border_width",onoff,rows,cols)
-			set_values(value_matrix,border_map[border]*"_border_width",border_width,rows,cols)
+			set_properties!(property_matrix,border_map[border]*"_border_width",onoff,rows,cols)
+			set_values!(value_matrix,border_map[border]*"_border_width",border_width,rows,cols)
 		end
 	end
 	return

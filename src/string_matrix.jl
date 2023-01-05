@@ -6,7 +6,7 @@ function update_string_matrix!(dt)
 	value_matrix      = dt.value_matrix	
 	nrow              = dt.global_properties["nrow"]
 	ncol              = dt.global_properties["ncol"]
-	string_matrix     = make_string_matrix(nrow,ncol) 
+	string_matrix     = make_string_matrix!(nrow,ncol) 
 
 	for i = 1:nrow
 		for j = 1:ncol
@@ -17,7 +17,7 @@ function update_string_matrix!(dt)
 	return 
 end
 
-function make_string_matrix(nrow_string_matrix,ncol_string_matrix)
+function make_string_matrix!(nrow_string_matrix,ncol_string_matrix)
 
 	str_matrix = Vector{Any}(undef, nrow_string_matrix)
 	for i = 1:nrow_string_matrix
