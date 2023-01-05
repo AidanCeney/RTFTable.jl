@@ -1,4 +1,4 @@
-function set_font!_size!(dt::jtable.DataTable,font_size;rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+function set_font!_size!(dt::RTFTable.DataTable,font_size;rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 
 	if mod(font_size * 10,5) != 0
 		 error("font_size must be a factor of .5")
@@ -9,7 +9,7 @@ function set_font!_size!(dt::jtable.DataTable,font_size;rows::Union{Vector{Int},
 	return
 end
 
-function set_font!(dt::jtable.DataTable,font;rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+function set_font!(dt::RTFTable.DataTable,font;rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	if !(font in dt.global_properties["fonts"]) 
 		push!(dt.global_properties["fonts"],font)
 	end
@@ -25,7 +25,7 @@ function set_font!(dt::jtable.DataTable,font;rows::Union{Vector{Int}, Int, Nothi
 	return
 end
 
-function set_alignment!(dt::jtable.DataTable,align;rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+function set_alignment!(dt::RTFTable.DataTable,align;rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 
 	property_matrix = dt.property_matrix
 	if !(align in ["left","right","center","justify"])

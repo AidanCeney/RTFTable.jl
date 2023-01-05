@@ -1,4 +1,4 @@
-function merge_cols!(dt::jtable.DataTable; rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+function merge_cols!(dt::RTFTable.DataTable; rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	
 	if isnothing(cols)
 		cols = 1:length(dt.property_matrix[1])
@@ -18,16 +18,16 @@ function init_cellx(j::Int,ncol::Int,leng_inch::Float64)
 	return Int(round(j * (leng_inch * inch_twip_ratio / ncol)))
 end
 
-function reset_col_width(dt::jtable.DataTable)
+function reset_col_width(dt::RTFTable.DataTable)
 	
 	ncol         = dt.global_properties["ncol"]
 	doc_width    = dt.global_properties["doc_len"]
 	col_width    = Int(floor(doc_width * 1440 /ncol))
-	set_cell_width!(dt::jtable.DataTable,col_width)
+	set_cell_width!(dt::RTFTable.DataTable,col_width)
 	return
 end
 
-function set_cell_width!(dt::jtable.DataTable,col_width::Union{Float64,Vector{Float64}};rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+function set_cell_width!(dt::RTFTable.DataTable,col_width::Union{Float64,Vector{Float64}};rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	
 	col_width = col_width * inch_twip_ratio
 	
@@ -64,7 +64,7 @@ function set_cell_width!(dt::jtable.DataTable,col_width::Union{Float64,Vector{Fl
 	return
 end
 
-function add_padding!(dt::jtable.DataTable, onoff::Bool, value::Int;sides::Vector{String} = ["b" "l" "t" "r"], rows::Union{Vector{Int}, Int, Nothing}= Nothing(), cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+function add_padding!(dt::RTFTable.DataTable, onoff::Bool, value::Int;sides::Vector{String} = ["b" "l" "t" "r"], rows::Union{Vector{Int}, Int, Nothing}= Nothing(), cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	
 	border_map = Dict("b" => "bottom",
 			  		  "l" => "left",

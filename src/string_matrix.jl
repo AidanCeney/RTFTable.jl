@@ -36,7 +36,7 @@ end
 function write_properties(string_matrix,properties_cell,values_cell,i,j)
 	for (property_func, property_used) in properties_cell
 		    if property_used
-			    getfield(jtable, Symbol(property_func))(string_matrix,values_cell[property_func],i,j)
+			    getfield(RTFTable, Symbol(property_func))(string_matrix,values_cell[property_func],i,j)
 		    end
 	end
 end

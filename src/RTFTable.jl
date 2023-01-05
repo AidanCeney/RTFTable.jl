@@ -1,4 +1,4 @@
-module jtable
+module RTFTable
 
 
 project_path(parts...) = normpath(joinpath(@__DIR__, "..", parts...))

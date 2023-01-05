@@ -1,4 +1,4 @@
-function add_df!(dt::jtable.DataTable,df;position::Union{Nothing,Int} = Nothing(),header::Bool = false,rowwise::Bool = true)	
+function add_df!(dt::RTFTable.DataTable,df;position::Union{Nothing,Int} = Nothing(),header::Bool = false,rowwise::Bool = true)	
 	
 	if rowwise
 		if(DataFrames.ncol(df) != length(dt.property_matrix[1]))
@@ -68,17 +68,17 @@ function add_df!(dt::jtable.DataTable,df;position::Union{Nothing,Int} = Nothing(
 	return dt
 end
 
-function add_row(dt::jtable.DataTable,row::Vector;position::Union{Nothing,Int} = Nothing())
+function add_row(dt::RTFTable.DataTable,row::Vector;position::Union{Nothing,Int} = Nothing())
 	df = DataFrames.DataFrame(reshape(row,1,:),:auto)
-	new_dt = add_df!(dt::jtable.DataTable,df,position = position)
+	new_dt = add_df!(dt::RTFTable.DataTable,df,position = position)
 	dt.property_matrix = new_dt.property_matrix
 	dt.value_matrix    = new_dt.value_matrix
 	return dt
 end
 
-function add_col(dt::jtable.DataTable,col::Vector;position::Union{Nothing,Int} = Nothing())
+function add_col(dt::RTFTable.DataTable,col::Vector;position::Union{Nothing,Int} = Nothing())
 	df = DataFrames.DataFrame(reshape(col,:,1),:auto)
-	new_dt = add_df!(dt::jtable.DataTable,df,position = position,rowwise = false)
+	new_dt = add_df!(dt::RTFTable.DataTable,df,position = position,rowwise = false)
 	dt.property_matrix = new_dt.property_matrix
 	dt.value_matrix    = new_dt.value_matrix
 	return dt
