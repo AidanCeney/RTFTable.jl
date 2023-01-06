@@ -51,7 +51,7 @@ function set_italic!(dt;onoff::Bool = true,rows::Union{Vector{Int}, Int, Nothing
 end
 
 
-function set_font!_color(dt;red::Int = 0,green::Int = 0,blue::Int = 0,onoff::Bool = true,rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())	
+function set_font_color!(dt;red::Int = 0,green::Int = 0,blue::Int = 0,onoff::Bool = true,rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())	
 	
 	property_matrix = dt.property_matrix
 	value_matrix    = dt.value_matrix

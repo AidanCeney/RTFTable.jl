@@ -13,12 +13,12 @@ function add_footer_or_title(dt::RTFTable.DataTable,footer::Bool, text::String, 
     return 
 end
 
-function add_footer!(dt::RTFTable.DataTable, text; font::Union{String, Nothing} = Nothing(),font_size::Int = 20)
+function add_footer!(dt::RTFTable.DataTable, text; font::Union{String, Nothing} = Nothing(),font_size::Int = 8)
     add_footer_or_title(dt, true, text, font, font_size)
     return 
 end
 
-function add_title!(dt::RTFTable.DataTable, text::String; font::Union{String, Nothing} = Nothing(),font_size::Int = 28)
+function add_title!(dt::RTFTable.DataTable, text::String; font::Union{String, Nothing} = Nothing(),font_size::Int = 14)
     add_footer_or_title(dt, false, text, font, font_size)
     return 
 end
