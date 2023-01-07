@@ -1,14 +1,27 @@
-function write_table(dt::RTFTable.DataTable,rtf_path;update = true)
+function write_table(dt::RTFTable.DataTable,rtf_path;update = true,append = false)
 	
 	if update
 		update_string_matrix!(dt)
 	end
 	string_matrix = dt.string_matrix
-	touch(rtf_path)
-	rtf_file = open(rtf_path,"w")
-	write(rtf_file,"{\\rtf1\\ansi\\deff0")
-	write(rtf_file,get_font_colors(dt))
-	write(rtf_file,get_font_table(dt))
+	
+	if !append
+		touch(rtf_path)
+		rtf_file = open(rtf_path,"w")
+		write(rtf_file,"{\\rtf1\\ansi\\deff0")
+		write(rtf_file,get_font_colors(dt))
+		write(rtf_file,get_font_table(dt))
+	else
+		prev_rtf_file    = split(read(rtf_path,String),"\n")
+	    prev_rtf_file    = prev_rtf_file[1:(length(prev_rtf_file)-1)]
+		prev_rtf_file    = join(prev_rtf_file,"\n")
+		rm(rtf_path,force = true)
+		touch(rtf_path)
+		rtf_file = open(rtf_path,"w")
+		write(rtf_file,prev_rtf_file)
+		write(rtf_file,"\n\\page\n")
+	end
+
 	for i = 1:size(string_matrix,1) 
 		write(rtf_file,"\n{\n\\trowd\n")
 		for j = 1:2
