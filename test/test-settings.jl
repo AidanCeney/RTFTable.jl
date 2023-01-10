@@ -1,5 +1,5 @@
 
-@testset "settings_onoff" begin
+@testset "settings_constructive" begin
     RTFTable.set_property_default!("bold",true,"")
     df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
     dt = RTFTable.make_data_table(df)

@@ -1,8 +1,8 @@
-function set_property_default!(property::String,onoff::Bool,value::String)
-    @set_preferences!(property => [onoff,value])
+function set_property_default!(property::String,constructive::Bool,value::String)
+    @set_preferences!(property => [constructive,value])
 end
 
-function get_property_default_onoff(property::String)
+function get_property_default_constructive(property::String)
     if !@has_preference(property)
         return Nothing()
     end

@@ -64,14 +64,14 @@ function set_cell_width!(dt::RTFTable.DataTable,col_width::Union{Float64,Vector{
 	return
 end
 
-function add_padding!(dt::RTFTable.DataTable, onoff::Bool, value::Int;sides::Vector{String} = ["b" "l" "t" "r"], rows::Union{Vector{Int}, Int, Nothing}= Nothing(), cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+function add_padding!(dt::RTFTable.DataTable, constructive::Bool, value::Int;sides::Vector{String} = ["b" "l" "t" "r"], rows::Union{Vector{Int}, Int, Nothing}= Nothing(), cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	
 	border_map = Dict("b" => "bottom",
 			  		  "l" => "left",
 			  		  "t" => "top",
 			  		  "r" => "right")
 	for side in sides
-		set_properties!(dt.property_matrix,border_map[side] * "_padding", onoff, rows, cols)
+		set_properties!(dt.property_matrix,border_map[side] * "_padding", constructive, rows, cols)
 		set_values!(dt.value_matrix, border_map[side] * "_padding", string(value), rows, cols)
 	end
 	return

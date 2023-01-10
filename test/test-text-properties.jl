@@ -1,7 +1,7 @@
 df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
 dt = RTFTable.make_data_table(df)
-@testset "set_font!_size!" begin
-    RTFTable.set_font!_size!(dt,20)
+@testset "set_font_size!" begin
+    RTFTable.set_font_size!(dt,20)
 	aTest = RTFTable.getAll(dt.value_matrix,"fs")
     @test all(i -> i == "40",aTest)
 end

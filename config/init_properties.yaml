@@ -1,81 +1,81 @@
 clmgf:
-  onoff: false
+  constructive: false
   value: 
 clmrg:
-  onoff: false
+  constructive: false
   value:
 left_border:
-  onoff: false
+  constructive: false
   value:
 left_border_width:
-  onoff: false
+  constructive: false
   value: 10
 top_border:
-  onoff: false
+  constructive: false
   value:
 top_border_width:
-  onoff: false
+  constructive: false
   value: 10
 right_border:
-  onoff: false
+  constructive: false
   value:
 right_border_width:
-  onoff: false
+  constructive: false
   value: 10
 bottom_border:
-  onoff: false
+  constructive: false
   value:
 bottom_border_width:
-  onoff: false
+  constructive: false
   value: 10
 left_padding:
-  onoff: false
+  constructive: false
   value: 10
 top_padding:
-  onoff: false
+  constructive: false
   value: 10
 right_padding:
-  onoff: false
+  constructive: false
   value: 10
 bottom_border:
-  onoff: false
+  constructive: false
   value: 10
 left_align:
-  onoff: true
+  constructive: true
   value: 
 center_align:
-  onoff: false
+  constructive: false
   value: 
 right_align:
-  onoff: false
+  constructive: false
   value: 
 justify_align:
-  onoff: false
+  constructive: false
   value:
 bracket_open:
-  onoff: true
+  constructive: true
   value:  
 bold:
-  onoff: false
+  constructive: false
   value: 
 italic:
-  onoff: false
+  constructive: false
   value: 
 fs:
-  onoff: true
+  constructive: true
   value: 20
 fontcolor:
-  onoff: false
+  constructive: false
   value: 
 font:
-  onoff: true
+  constructive: true
   value: Arial
 value:
-  onoff: true
+  constructive: true
   value: 
 bracket_close:
-  onoff: true
+  constructive: true
   value:  
 cellx:
-  onoff: true
+  constructive: true
   value:

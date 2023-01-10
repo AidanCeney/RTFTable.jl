@@ -1,4 +1,24 @@
-function add_df!(dt::RTFTable.DataTable,df;position::Union{Nothing,Int} = Nothing(),header::Bool = false,rowwise::Bool = true)	
+"""
+	add_df!(dt::RTFTable.DataTable,df;position::Union{Nothing,Int} = Nothing(),header::Bool = false,rowwise::Bool = true)	
+
+Appends the provided `DataFrame` to the provided `DataTable`. Can be used to add columns or rows to the `DataTable` but the corresponding number of rows or columns must match.
+
+# Arguments
+- `dt`: Data Table to set.
+- `df`: `DatFrame` to add.
+- `position`: Index of where the to add the `DataFrame`. When 0 adds at the beginning while n or `Nothing` adds to the end.
+- `header`: When `true` also adds the `DataFrame` header. 
+- `rowwise`: When `true` adds new rows, when `false` adds columns. 
+# Example
+```julia-repl
+using DataFrames
+using RTFTable
+df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+dt = RTFTable.make_data_table(df)
+RTFTable.set_font_color!(dt,blue = 255,cols = 2)
+```
+"""
+function add_df!(dt::RTFTable.DataTable,df::DataFrames.AbstractDataFrame;position::Union{Nothing,Int} = Nothing(),header::Bool = false,rowwise::Bool = true)	
 	
 	if rowwise
 		if(DataFrames.ncol(df) != length(dt.property_matrix[1]))
@@ -18,7 +38,7 @@ function add_df!(dt::RTFTable.DataTable,df;position::Union{Nothing,Int} = Nothin
 		end
 	end
 
-	new_dt              = make_data_table(df,header = header)
+	new_dt = make_data_table(df,header = header)
 	
 	nrow = length(dt.property_matrix)
 	ncol = length(dt.property_matrix[1])

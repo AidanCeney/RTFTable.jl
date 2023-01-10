@@ -1,4 +1,20 @@
-function write_table(dt::RTFTable.DataTable,rtf_path;update = true,append = false)
+"""
+	write_table(dt::RTFTable.DataTable,rtf_path;update = true,append = false)
+
+Writes DataTable to an provided rtf file.
+	
+# Arguments
+- `dt::DataTable`: Data Table to write.
+- `rtf_path::String`: Path to write to.
+- `update::Bool`: Updates String Matrix when true, set to `false` when String Matrix has been updated manualy. 
+- `append::Bool`: Appends to existing file if true, previous file must have been generate by RTFTable and have the same Font Table and Font Color table to work properly.
+
+# Example
+```julia-repl
+RTFTable.write_table(dt,"example.rtf")
+```
+"""
+function write_table(dt::RTFTable.DataTable,rtf_path::String;update::Bool = true,append::Bool = false)
 	
 	if update
 		update_string_matrix!(dt)
@@ -39,7 +55,19 @@ function write_table(dt::RTFTable.DataTable,rtf_path;update = true,append = fals
 	close(rtf_file)
 	return 
 end
+"""
+	get_font_table(dt::RTFTable.DataTable)
 
+Returns a string of the font table for the provided DataTable.
+	
+# Arguments
+- `dt::DataTable`: Data Table to write.
+
+# Example
+```julia-repl
+write(rtf_file,get_font_table(dt))
+```
+"""
 function get_font_table(dt)
 	
 	fonts = dt.global_properties["fonts"]
@@ -51,7 +79,19 @@ function get_font_table(dt)
 	ret =  ret * "}\n"
 	return ret
 end
+"""
+	get_font_colors(dt::RTFTable.DataTable)
 
+Returns a string of the font color table for the provided DataTable.
+	
+# Arguments
+- `dt::DataTable`: Data Table to write.
+
+# Example
+```julia-repl
+write(rtf_file,get_font_colors(dt))
+```
+"""
 function get_font_colors(dt)
 	
 	fontcolors = dt.global_properties["fontcolors"]

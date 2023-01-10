@@ -12,7 +12,7 @@ end;
 end;
 
 @testset "fontsize_error" begin
-    @test_throws ErrorException("font_size must be a factor of .5") RTFTable.set_font!_size!(dt,20.2)
+    @test_throws ErrorException("font_size must be a factor of .5") RTFTable.set_font_size!(dt,20.2)
 end;
 
 @testset "alignment_error" begin

@@ -36,10 +36,10 @@ function init_property_matrix!(dt::RTFTable.DataTable,nrow::Int,ncol::Int)
 	config_properties = YAML.load_file(project_path("config/init_properties.yaml"),dicttype=OrderedDict)
 
 	for (prop,dict)  = config_properties
-		if !isnothing(get_property_default_onoff(prop))
-			set_properties!(dt.property_matrix,prop,get_property_default_onoff(prop),Nothing(),Nothing())
+		if !isnothing(get_property_default_constructive(prop))
+			set_properties!(dt.property_matrix,prop,get_property_default_constructive(prop),Nothing(),Nothing())
 		else
-			set_properties!(dt.property_matrix,prop,dict["onoff"],Nothing(),Nothing())
+			set_properties!(dt.property_matrix,prop,dict["constructive"],Nothing(),Nothing())
 		end
 	end
 	return

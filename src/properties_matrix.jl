@@ -83,8 +83,8 @@ function make_property_matrix!(mlen::Int64,mht::Int64)
 	return make_dict_matrix!(mlen,mht,Bool)
 end
 
-function set_properties!(property_matrix::Vector,prop::String,onoff::Bool,rows::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}},cols::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}})
-	return set_dict_matrix!(property_matrix,prop,onoff,rows,cols)
+function set_properties!(property_matrix::Vector,prop::String,constructive::Bool,rows::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}},cols::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}})
+	return set_dict_matrix!(property_matrix,prop,constructive,rows,cols)
 end
 
 
