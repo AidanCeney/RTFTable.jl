@@ -11,7 +11,7 @@ using  DataStructures
 using Preferences
 
 include("properties_settings.jl")
-include("rtf_table.jl")
+include("datatable.jl")
 include("properties_matrix.jl")
 include("string_matrix.jl")
 include("table_properties.jl")
