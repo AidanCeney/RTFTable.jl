@@ -11,6 +11,7 @@ include("test-text-properties.jl")
 include("test-title-footer.jl")
 include("test-error.jl")
 include("test-settings.jl")
+include("test-table-mod.jl")
 
 @testset "BasicTests" begin
 	df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])

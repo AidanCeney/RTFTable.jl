@@ -1,3 +1,21 @@
+"""
+	merge_cols!(dt::RTFTable.DataTable; rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+
+Merges columns together for provided `DataTable`. Columns that are meged must be adjacent.
+
+# Arguments
+- `dt`: Data Table to merge.
+- `rows`: Rows that will have columns merged. When `Nothing` all are selected. 
+- `cols`: Columns that will be merged.
+# Example
+```julia-repl
+using DataFrames
+using RTFTable
+df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+dt = RTFTable.make_data_table(df)
+RTFTable.merge_cols!(dt::RTFTable.DataTable,rows = 1,cols = [1,2])
+```
+"""
 function merge_cols!(dt::RTFTable.DataTable; rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	
 	if isnothing(cols)
@@ -20,13 +38,32 @@ end
 
 function reset_col_width(dt::RTFTable.DataTable)
 	
-	ncol         = dt.global_properties["ncol"]
-	doc_width    = dt.global_properties["doc_len"]
-	col_width    = Int(floor(doc_width * 1440 /ncol))
+	ncol         = length(dt.property_matrix[1])
+	doc_width    = dt.global_properties["doc_width"]
+	col_width    = doc_width / ncol
 	set_cell_width!(dt::RTFTable.DataTable,col_width)
 	return
 end
 
+"""
+	set_cell_width!(dt::RTFTable.DataTable,col_width::Union{Float64,Vector{Float64}};rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
+
+	Set the cell widths for the provided `DataTable`. 
+
+# Arguments
+- `dt`: Data Table to set widths.
+- `col_width`: A Numeric vector of value or a value to set widths for in inches. When a Vector length must match number of columns you are setting.
+- `rows`: Rows to set, when Nothing all rows are selected. 
+- `cols`: Cols to set, when Nothing all cols are selected. 
+# Example
+```julia-repl
+using DataFrames
+using RTFTable
+df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+dt = RTFTable.make_data_table(df)
+RTFTable.set_cell_width!(dt::RTFTable.DataTable,1.0)
+```
+"""
 function set_cell_width!(dt::RTFTable.DataTable,col_width::Union{Float64,Vector{Float64}};rows::Union{Vector{Int}, Int, Nothing}= Nothing(),cols::Union{Vector{Int}, Int, Nothing}= Nothing())
 	
 	col_width = col_width * inch_twip_ratio

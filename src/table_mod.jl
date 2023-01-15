@@ -1,7 +1,7 @@
 """
 	add_df!(dt::RTFTable.DataTable,df;position::Union{Nothing,Int} = Nothing(),header::Bool = false,rowwise::Bool = true)	
 
-Appends the provided `DataFrame` to the provided `DataTable`. Can be used to add columns or rows to the `DataTable` but the corresponding number of rows or columns must match.
+Appends the provided `DataFrame` to the provided `DataTable`. Can be used to add columns or rows to the `DataTable` but the corresponding number of rows or columns must match. For the new row or columns the default settings will be used.
 
 # Arguments
 - `dt`: Data Table to set.
@@ -15,7 +15,7 @@ using DataFrames
 using RTFTable
 df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
 dt = RTFTable.make_data_table(df)
-RTFTable.set_font_color!(dt,blue = 255,cols = 2)
+RTFTable.add_df!(dt,df)
 ```
 """
 function add_df!(dt::RTFTable.DataTable,df::DataFrames.AbstractDataFrame;position::Union{Nothing,Int} = Nothing(),header::Bool = false,rowwise::Bool = true)	
@@ -25,7 +25,7 @@ function add_df!(dt::RTFTable.DataTable,df::DataFrames.AbstractDataFrame;positio
 			error("When adding new rows number of columns must match")
 		end
 	else
-		if(DataFrames.nrow(df) != length(dt.property_matrix))
+		if((DataFrames.nrow(df) + header) != length(dt.property_matrix))
 			error("When adding new columns number of rows must match")
 		end
 	end
@@ -87,16 +87,50 @@ function add_df!(dt::RTFTable.DataTable,df::DataFrames.AbstractDataFrame;positio
 	
 	return dt
 end
+"""
+	add_row!(dt::RTFTable.DataTable,row::Vector;position::Union{Nothing,Int} = Nothing())
 
-function add_row(dt::RTFTable.DataTable,row::Vector;position::Union{Nothing,Int} = Nothing())
+Adds a row to provided `DataTable` based on provided `row` vector 
+
+# Arguments
+- `dt`: Data Table to set.
+- `row`: Row you want to add
+- `position`: Index of where the to add the row. When 0 adds at the beginning while n or `Nothing` adds to the end.
+# Example
+```julia-repl
+using DataFrames
+using RTFTable
+df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+dt = RTFTable.make_data_table(df)
+RTFTable.add_row!(dt,["A","B"])
+```
+"""
+function add_row!(dt::RTFTable.DataTable,row::Vector;position::Union{Nothing,Int} = Nothing())
 	df = DataFrames.DataFrame(reshape(row,1,:),:auto)
 	new_dt = add_df!(dt::RTFTable.DataTable,df,position = position)
 	dt.property_matrix = new_dt.property_matrix
 	dt.value_matrix    = new_dt.value_matrix
 	return dt
 end
+"""
+	add_col!(dt::RTFTable.DataTable,col::Vector;position::Union{Nothing,Int} = Nothing())
 
-function add_col(dt::RTFTable.DataTable,col::Vector;position::Union{Nothing,Int} = Nothing())
+Adds a row to provided `DataTable` based on provided `col` vector 
+
+# Arguments
+- `dt`: Data Table to set.
+- `col`: Column you want to add
+- `position`: Index of where the to add the column. When 0 adds at the beginning while n or `Nothing` adds to the end.
+# Example
+```julia-repl
+using DataFrames
+using RTFTable
+df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+dt = RTFTable.make_data_table(df)
+RTFTable.add_col!(dt,["A","1","2","3","4"])
+```
+"""
+function add_col!(dt::RTFTable.DataTable,col::Vector;position::Union{Nothing,Int} = Nothing())
 	df = DataFrames.DataFrame(reshape(col,:,1),:auto)
 	new_dt = add_df!(dt::RTFTable.DataTable,df,position = position,rowwise = false)
 	dt.property_matrix = new_dt.property_matrix

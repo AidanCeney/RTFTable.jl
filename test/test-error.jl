@@ -21,6 +21,6 @@ end;
 
 
 @testset "border_error" begin
-    @test_throws ErrorException("sides argument must be one of the following: b, l, t, r") RTFTable.set_borders!(dt,sides = "Error")
+    @test_throws ErrorException("sides argument must be one of the following: b, l, t, r") RTFTable.set_borders!(dt,sides = ["Error"])
     @test_throws ErrorException("sides argument must be one of the following: b, l, t, r") RTFTable.set_borders!(dt,sides = ["l","Error"])
 end;

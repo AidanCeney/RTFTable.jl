@@ -1,5 +1,21 @@
+"""
+	update_string_matrix!(dt::RTFTable.DataTable)
 
-function update_string_matrix!(dt)
+Updates the `string matrix` based on the `property matrix` and `value matrix` 
+
+# Arguments
+- `dt`: Data Table to update `string matrix`.
+# Example
+```julia-repl
+using DataFrames
+using RTFTable
+df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+dt = RTFTable.make_data_table(df)
+RTFTable.set_bold!(dt)
+RTFTable.update_string_matrix!(dt)
+```
+"""
+function update_string_matrix!(dt::RTFTable.DataTable)
 	
 
 	properties_matrix = dt.property_matrix
@@ -30,7 +46,6 @@ function make_string_matrix!(nrow_string_matrix,ncol_string_matrix)
 		end
 	end
 	return str_matrix 
-
 end
 
 function write_properties(string_matrix,properties_cell,values_cell,i,j)
