@@ -1,3 +1,37 @@
+@testset "add_df!_pos" begin
+df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+dt = RTFTable.make_data_table(df)
+RTFTable.add_df!(dt,df,position = 3)
+aTest = RTFTable.getAll(dt.value_matrix,"value")
+expected = ["A"  "B";
+            "1"  "M";
+            "2"  "F";
+            "1"  "M";
+            "2"  "F";
+            "3"  "F";
+            "4"  "M";
+            "3"  "F";
+            "4"  "M";]
+@test aTest == expected
+df2 = DataFrame(A=1:5,B = ["A","M", "F", "F", "M"])
+dt = RTFTable.make_data_table(df)
+RTFTable.add_df!(dt,df2,rowwise = false,position = 1)
+aTest = RTFTable.getAll(dt.value_matrix,"value")
+expected = ["A"  "1" "A" "B";
+            "1"  "2" "M" "M";
+            "2"  "3" "F" "F";
+            "3"  "4" "F" "F";
+            "4"  "5" "M" "M";]
+@test aTest == expected
+aTest = RTFTable.getAll(dt.value_matrix,"cellx")
+expected = ["2340"  "4680" "7020"  "9360";
+            "2340"  "4680" "7020"  "9360";
+            "2340"  "4680" "7020"  "9360";
+            "2340"  "4680" "7020"  "9360";
+            "2340"  "4680" "7020"  "9360";]
+@test aTest == expected
+end;
+
 @testset "add_df!" begin
 df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
 dt = RTFTable.make_data_table(df)

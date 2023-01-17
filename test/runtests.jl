@@ -41,3 +41,15 @@ end;
 	@test result == expected_result
 end;
 
+@testset "AlignTests" begin
+	df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+	dt = RTFTable.make_data_table(df)
+	RTFTable.set_alignment!(dt,"left",rows = 1)
+	RTFTable.set_alignment!(dt,"right",rows = 2)
+	RTFTable.set_alignment!(dt,"center",rows = 3)
+	RTFTable.set_alignment!(dt,"justify",rows = 4)
+	RTFTable.write_table(dt,"/tmp/align_test.rtf")
+	result          = read("/tmp/align_test.rtf")
+	expected_result = read(project_path("test/man/align_test.rtf"))
+	@test result == expected_result
+end;
