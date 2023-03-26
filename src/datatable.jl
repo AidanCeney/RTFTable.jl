@@ -1,7 +1,7 @@
 """
 	DataTable
 
-`DataTable` scrut that holds table properties, values, and current string output, as well as global properties.  
+`DataTable` struct that holds table properties, values, and current string output, as well as global properties.  
 
 # Fields
 - `properties_matrix`: A 2d vector, with dimensions corresponding to the num`ber of rows and columns of the table, that holds a dictionary of booleans that sets if property should be used.
@@ -121,4 +121,5 @@ function Base.show(io::IO, z::DataTable)
 	Values = Values[2:size(Values,1),:]
 
 	print(io,PrettyTables.pretty_table(Values,header = header))
+	print("Printed table does not update with properties")
 end
