@@ -84,7 +84,7 @@ function set_cell_width!(dt::RTFTable.DataTable,col_width::Union{Float64,Vector{
 
 	for i = eachindex(rows)
 		width_val = 0		
-		new_width = map(x->parse(Int64,x),orig_width[rows[i],:])
+		new_width = map(x->parse(Int,x),orig_width[rows[i],:])
 		prev = 0
 		for w = eachindex(new_width)
 			tmp = new_width[w]

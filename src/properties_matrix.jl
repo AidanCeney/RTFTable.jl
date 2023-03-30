@@ -15,7 +15,7 @@ function make_dict_matrix!(mlen::Int,mht::Int,type::Type)
 	return property_matrix
 end
 
-function set_dict_matrix!(dict_matrix::Vector,prop::String,set::Union{Bool,String},rows::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}},cols::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}})
+function set_dict_matrix!(dict_matrix::Vector,prop::String,set::Union{Bool,String},rows::Union{Vector{Int}, Int, Nothing, UnitRange{Int}},cols::Union{Vector{Int}, Int, Nothing, UnitRange{Int}})
 
 	if length(dict_matrix) == 0
 		error("dict_matrix is empty")
@@ -83,16 +83,16 @@ function make_property_matrix!(mlen::Int,mht::Int)
 	return make_dict_matrix!(mlen,mht,Bool)
 end
 
-function set_properties!(property_matrix::Vector,prop::String,constructive::Bool,rows::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}},cols::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}})
+function set_properties!(property_matrix::Vector,prop::String,constructive::Bool,rows::Union{Vector{Int}, Int, Nothing, UnitRange{Int}},cols::Union{Vector{Int}, Int, Nothing, UnitRange{Int}})
 	return set_dict_matrix!(property_matrix,prop,constructive,rows,cols)
 end
 
 
-function make_value_matrix!(mlen::Int64,mht::Int64)
+function make_value_matrix!(mlen::Int,mht::Int)
 	return make_dict_matrix!(mlen,mht,String)
 end
 
-function set_values!(value_matrix::Vector,prop::String,value::String,rows::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}},cols::Union{Vector{Int}, Int, Nothing, UnitRange{Int64}})
+function set_values!(value_matrix::Vector,prop::String,value::String,rows::Union{Vector{Int}, Int, Nothing, UnitRange{Int}},cols::Union{Vector{Int}, Int, Nothing, UnitRange{Int}})
 	return set_dict_matrix!(value_matrix,prop,value,rows,cols)
 end
 
