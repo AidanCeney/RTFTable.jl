@@ -79,7 +79,7 @@ function getAll(dict_matrix::Vector,field::String)
 	return ret
 end
 
-function make_property_matrix!(mlen::Int64,mht::Int64)
+function make_property_matrix!(mlen::Int,mht::Int)
 	return make_dict_matrix!(mlen,mht,Bool)
 end
 
