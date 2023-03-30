@@ -10,8 +10,8 @@ end
     RTFTable.set_font!(dt,"Times",rows = 1)
 	aTest = RTFTable.getAll(dt.value_matrix,"font")
     @test all(i -> i == "2",aTest[1,:])
-    RTFTable.write_table(dt,"/tmp/set_font_test.rtf")
-	result          = read("/tmp/set_font_test.rtf")
+    RTFTable.write_table(dt,tempdir() * "/set_font_test.rtf")
+	result          = read(tempdir() * "/set_font_test.rtf")
 	expected_result = read(project_path("test/man/set_font_test.rtf"))
     @test result == expected_result
 end

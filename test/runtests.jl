@@ -20,8 +20,8 @@ include("test-table-mod.jl")
 	RTFTable.set_alignment!(dt,"center")
 	RTFTable.set_italic!(dt,rows = 1)
 	RTFTable.set_bold!(dt,rows = 1)
-	RTFTable.write_table(dt,"/tmp/basic_test.rtf")
-	result          = read("/tmp/basic_test.rtf")
+	RTFTable.write_table(dt, tempdir() * "/basic_test.rtf")
+	result          = read(tempdir() * "/basic_test.rtf")
 	expected_result = read(project_path("test/man/basic_test.rtf"))
 	@test result == expected_result
 end;
@@ -35,8 +35,8 @@ end;
 	RTFTable.set_font_color!(dt,blue = 255,cols = [2])
 	RTFTable.add_footer!(dt,"This is an example footer")
 	RTFTable.add_title!(dt,"A Title")
-	RTFTable.write_table(dt,"/tmp/moderate_test.rtf")
-	result          = read("/tmp/moderate_test.rtf")
+	RTFTable.write_table(dt, tempdir() * "/moderate_test.rtf")
+	result          = read(tempdir() * "/moderate_test.rtf")
 	expected_result = read(project_path("test/man/moderate_test.rtf"))
 	@test result == expected_result
 end;
@@ -48,8 +48,21 @@ end;
 	RTFTable.set_alignment!(dt,"right",rows = 2)
 	RTFTable.set_alignment!(dt,"center",rows = 3)
 	RTFTable.set_alignment!(dt,"justify",rows = 4)
-	RTFTable.write_table(dt,"/tmp/align_test.rtf")
-	result          = read("/tmp/align_test.rtf")
+	RTFTable.write_table(dt, tempdir() * "/align_test.rtf")
+	result          = read(tempdir() * "/align_test.rtf")
+	expected_result = read(project_path("test/man/align_test.rtf"))
+	@test result == expected_result
+end;
+
+@testset "AlignTests" begin
+	df = DataFrame(A=1:4,B = ["M", "F", "F", "M"])
+	dt = RTFTable.make_data_table(df)
+	RTFTable.set_alignment!(dt,"left",rows = 1)
+	RTFTable.set_alignment!(dt,"right",rows = 2)
+	RTFTable.set_alignment!(dt,"center",rows = 3)
+	RTFTable.set_alignment!(dt,"justify",rows = 4)
+	RTFTable.write_table(dt,tempdir() * "/align_test.rtf")
+	result          = read(tempdir() * "/align_test.rtf")
 	expected_result = read(project_path("test/man/align_test.rtf"))
 	@test result == expected_result
 end;
