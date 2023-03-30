@@ -11,8 +11,8 @@ end
 	aTest = RTFTable.getAll(dt.value_matrix,"font")
     @test all(i -> i == "2",aTest[1,:])
     RTFTable.write_table(dt,tempdir() * "/set_font_test.rtf")
-	result          = read(tempdir() * "/set_font_test.rtf")
-	expected_result = read(project_path("test/man/set_font_test.rtf"))
+	result          = read(tempdir() * "/set_font_test.rtf", String)
+	expected_result = read(project_path("test/man/set_font_test.rtf"),String)
     @test result == expected_result
 end
 @testset "set_align" begin
