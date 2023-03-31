@@ -1,3 +1,4 @@
+[![CI Testing](https://github.com/AidanCeney/RTFTable.jl/workflows/CI/badge.svg)](https://github.com/AidanCeney/RTFTable.jl)/actions)
 # RTFTable
 
 The `RTFTable` package provides a easy way to convert julia `DataFrames` into unique publication ready tables in the `rtf` format, with flexible formatting options. 
