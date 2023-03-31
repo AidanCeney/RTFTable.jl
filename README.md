@@ -5,7 +5,7 @@ The `RTFTable` package provides a easy way to convert julia `DataFrames` into un
 
 ## Table Generation Workflow
 
-Start by generating a `DataTable` struct by providing a `DataFrame` to  the `make_data_tabl()` function. 
+Start by generating a `DataTable` struct by providing a `DataFrame` to  the `make_data_table()` function. 
 ```julia
     using DataFrames
     using RTFTable
