@@ -23,6 +23,7 @@ include("test-table-mod.jl")
 	RTFTable.write_table(dt, tempdir() * "/basic_test.rtf")
 	result          = read(tempdir() * "/basic_test.rtf",String)
 	expected_result = read(project_path("test/man/basic_test.rtf"),String)
+	expected_result = replace(expected_result, "\r\n" => "\n") #Added for windows tests
 	@test result == expected_result
 end;
 
@@ -38,6 +39,7 @@ end;
 	RTFTable.write_table(dt, tempdir() * "/moderate_test.rtf")
 	result          = read(tempdir() * "/moderate_test.rtf",String)
 	expected_result = read(project_path("test/man/moderate_test.rtf"),String)
+	expected_result = replace(expected_result, "\r\n" => "\n") #Added for windows tests
 	@test result == expected_result
 end;
 
@@ -51,5 +53,6 @@ end;
 	RTFTable.write_table(dt, tempdir() * "/align_test.rtf")
 	result          = read(tempdir() * "/align_test.rtf",String)
 	expected_result = read(project_path("test/man/align_test.rtf"),String)
+	expected_result = replace(expected_result, "\r\n" => "\n") #Added for windows tests
 	@test result == expected_result
 end

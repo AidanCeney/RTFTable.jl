@@ -13,6 +13,7 @@ end
     RTFTable.write_table(dt,tempdir() * "/set_font_test.rtf")
 	result          = read(tempdir() * "/set_font_test.rtf", String)
 	expected_result = read(project_path("test/man/set_font_test.rtf"),String)
+    expected_result = replace(expected_result, "\r\n" => "\n") #Added for windows tests
     @test result == expected_result
 end
 @testset "set_align" begin
