@@ -113,13 +113,14 @@ function init_value_matrix!(dt::RTFTable.DataTable,df::DataFrames.AbstractDataFr
 	return
 end
 
+"""
+prints the DataFrame representation of a Datatable
+
+"""
 function Base.show(io::IO, z::DataTable)
-
-
 	Values = getAll(z.value_matrix,"value")
 	header = Values[1,:]
 	Values = Values[2:size(Values,1),:]
-
-	print(io,PrettyTables.pretty_table(Values,header = header))
-	print("Printed table does not update with properties")
+	PrettyTables.pretty_table(Values,header = header)
+	print("Console output isn't updated according to table properties.")
 end
