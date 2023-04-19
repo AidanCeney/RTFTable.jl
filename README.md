@@ -1,7 +1,7 @@
 [![CI Testing](https://github.com/AidanCeney/RTFTable.jl/workflows/CI/badge.svg)](https://github.com/AidanCeney/RTFTable.jl/actions?query=CI)
 # RTFTable
 
-The `RTFTable` package provides a easy way to convert julia `DataFrames` into unique publication ready tables in the `rtf` format, with flexible formatting options. 
+The `RTFTable` package provides a easy way to convert julia `DataFrames` into unique publication ready tables in the `rtf` format, with flexible formatting options.
 
 ## Table Generation Workflow
 
@@ -10,9 +10,9 @@ Start by generating a `DataTable` struct by providing a `DataFrame` to  the `mak
 using DataFrames
 using RTFTable
 df = DataFrame(Scale=["BAS-T","SR","BD1","ASRM","M-SRM"],
-	            High = ["42.15 (3.48)","20.36 (1.66)","5.14 (4.42)","6.39 (4.72)","13.20 (6.86)"],
-				Moderate = ["23.45 (7.82)","18.29 (3.21)","9.76 (4.44)","20.48 (8.22)","12.88 (3.27)"],
-				p = ["< .001","< .001",".120","348","< .001"])
+	       High = ["42.15 (3.48)","20.36 (1.66)","5.14 (4.42)","6.39 (4.72)","13.20 (6.86)"],
+	       Moderate = ["23.45 (7.82)","18.29 (3.21)","9.76 (4.44)","20.48 (8.22)","12.88 (3.27)"],
+	       p = ["< .001","< .001",".120","348","< .001"])
 dt = RTFTable.make_data_table(df)
 ```
 
